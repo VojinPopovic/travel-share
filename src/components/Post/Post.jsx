@@ -3,17 +3,7 @@ import ProfileIcon from "../../../public/profileIcon.svg";
 import Link from "next/link";
 import Image from "next/image";
 
-export default function Post({ data }) {
-  const content = data?.map((post) => {
-    return (
-      <>
-        <Link href="/" key={post.id}>
-          <p className="text-xl font-semibold _text-color">{post.title}</p>
-          <p className="_text-color font-medium">{post.body}</p>
-        </Link>
-      </>
-    );
-  });
+export default function Post({ post }) {
   return (
     <div className="w-full _post-border rounded-lg mt-5">
       <div className="flex justify-between py-3 px-4">
@@ -37,7 +27,10 @@ export default function Post({ data }) {
             </Link>
           </div>
         </div>
-        <div className="w-[90%]">{content}</div>
+        <div className="w-[90%]">
+          <p className="text-xl font-semibold _text-color">{post.title}</p>
+          <p className="_text-color font-medium">{post.body}</p>
+        </div>
       </div>
       <div className="flex pb-3 pl-5">
         <div>❤️</div>

@@ -26,7 +26,6 @@ export default function page() {
     fetcher
   );
 
-  console.log(data);
   if (session.status === "loading" || isLoading) {
     return <Loading />;
   }
@@ -82,7 +81,9 @@ export default function page() {
       </button>
       <section className="w-full px-[3%]">
         <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
-        <Post data={data}></Post>
+        {data?.map((post) => {
+          return <Post post={post} key={post.id}></Post>;
+        })}
       </section>
     </MainDiv>
   );
