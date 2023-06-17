@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+._text-color {
+  color: rgba(0, 0, 0, 0.68);
+}
+
+._button {
+  padding: 5px 15px;
+  border-radius: 10px;
+}
+
+._accent-color-bg {
+  background-color: rgba(207, 50, 0, 0.76);
+}
+._accent-color {
+  color: rgba(207, 50, 0, 0.76);
+}
+
+._second-accent-color-bg {
+  background-color: rgba(187, 187, 187, 0.73);
+}
+
+._transparent-gradient {
+  background: linear-gradient(
+    270deg,
+    rgba(187, 187, 187, 0.5) 5.07%,
+    rgba(246, 246, 246, 0.555027) 97.95%,
+    rgba(255, 255, 255, 0.532) 97.96%
+  );
+}
+
+._card-gradient {
+  background: rgba(187, 187, 187, 0.6);
+}
+
+._post-border {
+  border: 3px rgba(0, 0, 0, 0.68) solid;
+}
