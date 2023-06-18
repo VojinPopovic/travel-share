@@ -1,9 +1,37 @@
+import { useEffect, useState } from "react";
 import IcelandIcon from "../../../public/icelandIcon.svg";
 import ProfileIcon from "../../../public/profileIcon.svg";
 import Link from "next/link";
 import Image from "next/image";
 
 export default function Post({ post }) {
+  const [flag, setFlag] = useState("");
+  const [data, setData] = useState([]);
+  const [err, setErr] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getData = async () => {
+      setIsLoading(true);
+      const res = await fetch(
+        `https://restcountries.com/v3.1/name/${post.group}`,
+        {
+          cache: "no-store",
+        }
+      );
+
+      if (!res.ok) {
+        setErr(true);
+      }
+
+      const data = await res.json();
+
+      setData(data);
+      setIsLoading(false);
+    };
+    getData();
+  }, [post]);
+
   return (
     <div className="w-full _post-border rounded-lg mt-5">
       <div className="flex justify-between py-3 px-4">
@@ -11,19 +39,19 @@ export default function Post({ post }) {
           <div className="w-full">
             <Link href="/">
               <Image
-                className="w-[80%] mx-auto"
+                className="w-full mx-auto"
                 src={ProfileIcon}
                 alt=""
               ></Image>
             </Link>
           </div>
-          <div className="w-full">
+          <div className="w-full aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden">
             <Link href="/">
-              <Image
-                className="w-[80%] mx-auto"
-                src={IcelandIcon}
+              <img
+                className="w-full h-full mx-auto rounded-lg object-cover"
+                src={data[0]?.flags.svg}
                 alt=""
-              ></Image>
+              ></img>
             </Link>
           </div>
         </div>

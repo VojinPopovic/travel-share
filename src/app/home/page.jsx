@@ -21,12 +21,13 @@ export default function page() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data, mutate, error, isLoading } = useSWR(
+  const { data: postsData, isLoading: isPostsLoading } = useSWR(
     "/api/posts",
     fetcher
   );
 
-  if (session.status === "loading" || isLoading) {
+  
+  if (session.status === "loading" || isPostsLoading) {
     return <Loading />;
   }
 
@@ -35,6 +36,7 @@ export default function page() {
       router?.push("/");
     });
   }
+
   return (
     <MainDiv maxWidth="900px">
       <div className="relative w-full h-[393.75px]">
@@ -81,7 +83,7 @@ export default function page() {
       </button>
       <section className="w-full px-[3%]">
         <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
-        {data?.map((post) => {
+        {postsData?.map((post) => {
           return <Post post={post} key={post._id}></Post>;
         })}
       </section>
