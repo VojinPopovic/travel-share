@@ -6,13 +6,14 @@ import planeImage from "../../public/planeGraphic.svg";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
+import Loading from "@/components/Loading/Loading";
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
 
   if (session.status === "loading") {
-    return <p>Loading...</p>;
+    return <Loading />;
   }
 
   if (session.status === "authenticated") {

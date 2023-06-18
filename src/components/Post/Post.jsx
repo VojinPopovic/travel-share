@@ -29,7 +29,7 @@ export default function Post({ post }) {
         </div>
         <div className="w-[90%]">
           <p className="text-xl font-semibold _text-color">{post.title}</p>
-          <p className="_text-color font-medium">{post.body}</p>
+          <p className="_text-color font-medium">{post.desc}</p>
         </div>
       </div>
       <div className="flex pb-3 pl-5">
