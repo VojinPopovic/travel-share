@@ -22,7 +22,7 @@ export default function page() {
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data, mutate, error, isLoading } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts",
+    "/api/posts",
     fetcher
   );
 
@@ -82,7 +82,7 @@ export default function page() {
       <section className="w-full px-[3%]">
         <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
         {data?.map((post) => {
-          return <Post post={post} key={post.id}></Post>;
+          return <Post post={post} key={post._id}></Post>;
         })}
       </section>
     </MainDiv>
