@@ -9,6 +9,7 @@ export default function Post({ post }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  console.log("cao")
 
   useEffect(() => {
     const getData = async () => {
