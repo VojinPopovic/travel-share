@@ -12,8 +12,9 @@ import GroupsIcon from "../../../public/groupsIcon.svg";
 import SavedIcon from "../../../public/savedIcon.svg";
 import Post from "@/components/Post/Post";
 import Loading from "@/components/Loading/Loading";
+import Link from "next/link";
 
-export default function page() {
+export default function Home() {
   const session = useSession();
   console.log(session.status);
 
@@ -26,7 +27,6 @@ export default function page() {
     fetcher
   );
 
-  
   if (session.status === "loading" || isPostsLoading) {
     return <Loading />;
   }
@@ -50,32 +50,42 @@ export default function page() {
           ></Image>
         </div>
         <div className="absolute w-full bottom-0 flex justify-between px-[3%]">
-          <div className="w-[250px] aspect-[4/3] _card-gradient rounded-[20px] flex items-center justify-center flex-col">
-            <div className="w-1/2 h-1/3">
-              <Image
-                className="w-3/5 mx-auto max-h-[100px]"
-                src={FriendsIcon}
-                alt=""
-              ></Image>
+          <Link href="/friends">
+            <div className="w-[250px] aspect-[4/3] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
+              <div className="w-1/2 h-1/3">
+                <Image
+                  className="w-3/5 mx-auto max-h-[100px]"
+                  src={FriendsIcon}
+                  alt=""
+                ></Image>
+              </div>
+              <p className="text-[30px] font-semibold _text-color">Friends</p>
             </div>
-            <p className="text-[30px] font-semibold _text-color">Friends</p>
-          </div>
-          <div className="w-1/3 aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col">
-            <div className="w-1/2 h-1/3">
-              <Image className="w-3/5 mx-auto" src={GroupsIcon} alt=""></Image>
+          </Link>
+          <Link href="/groups">
+            <div className="w-[250px] aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
+              <div className="w-1/2 h-1/3">
+                <Image
+                  className="w-3/5 mx-auto"
+                  src={GroupsIcon}
+                  alt=""
+                ></Image>
+              </div>
+              <p className="text-[30px] font-semibold _text-color">Groups</p>
             </div>
-            <p className="text-[30px] font-semibold _text-color">Groups</p>
-          </div>
-          <div className="w-1/3 aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col">
-            <div className="w-1/2 h-1/3">
-              <Image
-                className="w-3/5 mx-auto max-h-[50px]"
-                src={SavedIcon}
-                alt=""
-              ></Image>
+          </Link>
+          <Link href="/saved">
+            <div className="w-[250px]  aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
+              <div className="w-1/2 h-1/3">
+                <Image
+                  className="w-3/5 mx-auto max-h-[50px]"
+                  src={SavedIcon}
+                  alt=""
+                ></Image>
+              </div>
+              <p className="text-[30px] font-semibold _text-color">Saved</p>
             </div>
-            <p className="text-[30px] font-semibold _text-color">Saved</p>
-          </div>
+          </Link>
         </div>
       </div>
       <button className="bg-green-400 absolute top-0" onClick={signOut}>
