@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import IcelandIcon from "../../../public/icelandIcon.svg";
 import ProfileIcon from "../../../public/profileIcon.svg";
 import Link from "next/link";
 import Image from "next/image";

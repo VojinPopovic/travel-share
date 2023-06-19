@@ -42,7 +42,7 @@ export default function Home() {
         <div className="relative w-full h-[393.75px]">
           <div className="absolute w-full h-[300px] top-0 left-0 -z-[10]">
             <Image
-              className="object-cover rounded-b-2xl"
+              className="object-cover"
               src={BackgroundImage}
               priority={true}
               fill={true}
