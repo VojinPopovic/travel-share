@@ -4,6 +4,7 @@ import SearchBar from "@/components/SearchBar/SearchBar";
 import MainDiv from "@/components/MainDiv/MainDiv";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
+import Navigation from "@/components/Navigation/Navigation";
 
 export async function getGroups() {
   const res = await fetch("https://restcountries.com/v3.1/all", {
@@ -23,7 +24,7 @@ export default async function Groups() {
           return (
             <div
               key={uuidv4()}
-              className="relative w-full h-[100px] mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl"
+              className="relative w-full mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl"
             >
               <div className="w-[10%] aspect-square rounded-full m-3 overflow-hidden">
                 <Link href={`/groups/${item.name.common}`}>
@@ -39,6 +40,7 @@ export default async function Groups() {
           );
         })}
       </div>
+      <Navigation/>
     </MainDiv>
   );
 }
