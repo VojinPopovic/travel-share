@@ -1,4 +1,4 @@
-export default function LoadingClient() {
+export default function Loading() {
   return (
     <div
       role="status"

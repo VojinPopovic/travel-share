@@ -11,8 +11,8 @@ import FriendsIcon from "../../../public/friendsIcon.svg";
 import GroupsIcon from "../../../public/groupsIcon.svg";
 import SavedIcon from "../../../public/savedIcon.svg";
 import Post from "@/components/Post/Post";
-import Loading from "@/components/Loading/Loading";
 import Link from "next/link";
+import Loading from "../loading";
 
 export default function Home() {
   const session = useSession();
@@ -22,25 +22,22 @@ export default function Home() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data: postsData, isLoading: isPostsLoading } = useSWR(
-    "/api/posts",
-    fetcher
-  );
-
-  if (session.status === "loading" || isPostsLoading) {
-    return <Loading />;
-  }
+  const { data, isLoading } = useSWR("/api/posts", fetcher);
 
   if (session.status === "unauthenticated") {
     setTimeout(() => {
       router?.push("/");
     });
   }
-  if (session.status === "authenticated") {
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (session.status === "authenticated" && !isLoading) {
     return (
-      <MainDiv maxWidth="900px">
+      <MainDiv>
         <div className="relative w-full h-[393.75px]">
-          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10]">
+          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)]">
             <Image
               className="object-cover"
               src={BackgroundImage}
@@ -93,7 +90,7 @@ export default function Home() {
         </button>
         <section className="w-full px-[3%]">
           <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
-          {postsData?.map((post) => {
+          {data?.map((post) => {
             return <Post post={post} key={post._id}></Post>;
           })}
         </section>
