@@ -40,7 +40,7 @@ export default async function Groups() {
           );
         })}
       </div>
-      <Navigation/>
+      <Navigation previousPage="/home"/>
     </MainDiv>
   );
 }
