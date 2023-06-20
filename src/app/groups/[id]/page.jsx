@@ -1,4 +1,4 @@
 export default function page({ params }) {
-  console.log(params.id);
-  return <div>page</div>;
+  const groupName = params.id.replaceAll("%20", " ");
+  return <div>{groupName}</div>;
 }

@@ -45,7 +45,7 @@ export default function Post({ post }) {
             </Link>
           </div>
           <div className="w-full aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden">
-            <Link href="/">
+            <Link href={`/groups/${data[0]?.name.common}`}>
               <img
                 className="w-full h-full mx-auto rounded-lg object-cover"
                 src={data[0]?.flags.svg}
