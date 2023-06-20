@@ -31,9 +31,7 @@ export default function Home() {
   }
   if (isLoading) {
     return <Loading />;
-  }
-
-  if (session.status === "authenticated" && !isLoading) {
+  } else if (session.status === "authenticated" && !isLoading) {
     return (
       <MainDiv>
         <div className="relative w-full h-[393.75px]">
