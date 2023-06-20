@@ -22,7 +22,7 @@ export default function Home() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data, isLoading } = useSWR("/api/posts", fetcher);
+  const { data, isLoading } = useSWR("/api/posts/group", fetcher);
 
   if (session.status === "unauthenticated") {
     setTimeout(() => {

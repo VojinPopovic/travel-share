@@ -26,7 +26,13 @@ export default function Home() {
     return (
       <>
         <div className="absolute top-0 left-0 w-full h-screen -z-10">
-          <Image className="w-full h-full" src={BackgroundImage} alt=""></Image>
+          <Image
+            className="w-full h-full"
+            src={BackgroundImage}
+            width="auto"
+            height="auto"
+            alt=""
+          ></Image>
         </div>
         <main className={`w-[100%] max-w-[1400px] h-screen mx-auto relative`}>
           <Navbar></Navbar>
@@ -37,6 +43,8 @@ export default function Home() {
                   className="absolute w-[35%] aspect-square top-[-100px] right-[-60px]"
                   src={planeImage}
                   alt=""
+                  width="auto"
+                  height="auto"
                 ></Image>
                 <p className="text-4xl _text-color font-bold">
                   Learn about
@@ -69,6 +77,8 @@ export default function Home() {
                 src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 fill={true}
                 alt=""
+                width="auto"
+                height="auto"
               ></Image>
             </div>
           </div>
