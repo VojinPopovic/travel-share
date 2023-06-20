@@ -37,7 +37,7 @@ export default function Home() {
     return (
       <MainDiv>
         <div className="relative w-full h-[393.75px]">
-          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)]">
+          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)] rounded-xl overflow-hidden">
             <Image
               className="object-cover"
               src={BackgroundImage}
@@ -88,7 +88,7 @@ export default function Home() {
         <button className="bg-green-400 absolute top-0" onClick={signOut}>
           Sign Out
         </button>
-        <section className="w-full px-[3%]">
+        <section className="w-full px-[3%] pb-4">
           <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
           {data?.map((post) => {
             return <Post post={post} key={post._id}></Post>;
