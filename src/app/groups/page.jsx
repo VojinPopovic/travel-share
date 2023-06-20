@@ -27,7 +27,7 @@ export default async function Groups() {
               className="relative w-full mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl"
             >
               <div className="w-[10%] aspect-square rounded-full m-3 overflow-hidden">
-                <Link href={`/groups/${item.name.common}`}>
+                <Link href={`/groups/${item.name.common.toLowerCase()}`}>
                   <img
                     className="w-full h-full mx-auto object-cover"
                     src={item.flags.svg}
