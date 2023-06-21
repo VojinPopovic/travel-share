@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function Post({ post }) {
-  const [flag, setFlag] = useState("");
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,7 +29,7 @@ export default function Post({ post }) {
     };
     getData();
   }, [post]);
-
+          
   return (
     <div className="w-full _post-border rounded-lg mt-5">
       <div className="flex justify-between py-3 px-4">
@@ -57,6 +56,7 @@ export default function Post({ post }) {
         <div className="w-[90%]">
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
+          {post.img !== "" ? <Image src={post.img} width={200} height={150} className="rounded-lg" alt=""></Image>: ""}
         </div>
       </div>
       <div className="flex pb-3 pl-5">
