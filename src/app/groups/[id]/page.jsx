@@ -10,7 +10,7 @@ export default function page({ params }) {
     fetcher
   );
   //const { data: pictureData, isLoading: isPictureLoading } = useSWR(
-  //  `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=tokyo&inputtype=textquery&fields=photos&key=`,
+  //  `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=tokyo&inputtype=textquery&fields=photos&key=""`,
  //   fetcher
   //);
 
