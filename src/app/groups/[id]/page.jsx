@@ -5,13 +5,14 @@ import Loading from "@/app/loading";
 import MainDiv from "@/components/MainDiv/MainDiv";
 import Image from "next/image";
 import Post from "@/components/Post/Post";
+import CreatePost from "@/components/CreatePost/CreatePost";
+import { useState } from "react";
 
 export default function page({ params }) {
+  const [renderPost, setRenderPost] = useState(false)
+
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  //const { data: pictureData, isLoading: isPictureLoading } = useSWR(
-  //  `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=tokyo&inputtype=textquery&fields=photos&key=""`,
-  //   fetcher
-  //);
+
   const { data: groupPostsData, isLoading: isGroupPostsLoading } = useSWR(
     `/api/posts/group?group=${params.id}`,
     fetcher
@@ -23,14 +24,16 @@ export default function page({ params }) {
     fetcher
   );
 
-  console.log(imageData);
+  function openModal() {
+    setRenderPost(true)
+  }
 
-  if (isGroupPostsLoading) {
+  if (isGroupPostsLoading || isImageLoading) {
     <Loading />;
   } else {
     return (
       <MainDiv>
-        <div className="relative w-full h-[400px] border-b-4 border-[rgba(0,0,0,0.68)]">
+        <div className="relative w-full h-[400px] border-b-2 border-[rgba(0,0,0,0.68)]">
           <div className="absolute bottom-0 left-0 w-1/3 max-w-[200px] flex justify-start items-center mb-4 ml-4">
             <div className="h-[70px] aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden mr-2">
               <Image
@@ -45,11 +48,18 @@ export default function page({ params }) {
           </div>
         </div>
         <section className="w-full px-[3%] pb-4">
-          <p className="_text-color text-2xl font-semibold mt-5">Group posts</p>
+          <div className="mt-5 flex gap-2">
+            <p className="_text-color text-2xl font-semibold">Group posts</p>
+            <button className="_button _card-gradient" onClick={openModal}>
+              Create a post
+            </button>
+            <button className="_button _card-gradient">Follow group</button>
+          </div>
           {groupPostsData?.map((post) => {
             return <Post post={post} key={post._id}></Post>;
           })}
         </section>
+        {renderPost === true ? <CreatePost setRenderPost={setRenderPost}/> : ""}
       </MainDiv>
     );
   }
