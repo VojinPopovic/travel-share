@@ -1,5 +1,3 @@
-"use client";
-
 import SearchBar from "@/components/SearchBar/SearchBar";
 import MainDiv from "@/components/MainDiv/MainDiv";
 import { v4 as uuidv4 } from "uuid";
