@@ -7,9 +7,10 @@ import Image from "next/image";
 import Post from "@/components/Post/Post";
 import CreatePost from "@/components/CreatePost/CreatePost";
 import { useState } from "react";
+import Navigation from "@/components/Navigation/Navigation";
 
 export default function page({ params }) {
-  const [renderPost, setRenderPost] = useState(false)
+  const [renderPost, setRenderPost] = useState(false);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -25,7 +26,7 @@ export default function page({ params }) {
   );
 
   function openModal() {
-    setRenderPost(true)
+    setRenderPost(true);
   }
 
   if (isGroupPostsLoading || isImageLoading) {
@@ -59,7 +60,12 @@ export default function page({ params }) {
             return <Post post={post} key={post._id}></Post>;
           })}
         </section>
-        {renderPost === true ? <CreatePost setRenderPost={setRenderPost}/> : ""}
+        {renderPost === true ? (
+          <CreatePost setRenderPost={setRenderPost} />
+        ) : (
+          ""
+        )}
+        <Navigation previousPage="/groups"></Navigation>
       </MainDiv>
     );
   }

@@ -5,62 +5,84 @@ export default function CreatePost({ setRenderPost }) {
     setRenderPost(false);
   }
   return (
-    <div
+    <form
       onClick={closeModal}
-      className="fixed top-0 left-0 w-full h-screen bg-[rgba(0,0,0,0.7)] _text-color"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[60vw] max-w-[600px] aspect-square fixed mx-auto my-auto left-0 right-0 top-0 bottom-0 py-6 px-6 flex flex-col justify-center"
+        className="relative py-3 sm:max-w-xl sm:mx-auto"
       >
-        <div className="relative py-3">
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-100 to-orange-500 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-6 py-10 bg-white shadow-lg sm:rounded-3xl">
-            <div className="max-w-md mx-auto">
-              <div>
-                <h1 className="text-2xl font-semibold">Make a new post</h1>
+        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
+          <div className="max-w-md mx-auto">
+            <div className="flex items-center space-x-5">
+              <div className="h-14 w-14 _card-gradient rounded-full flex flex-shrink-0 justify-center items-center _text-color text-2xl font-mono">
+                i
               </div>
-              <div className="divide-y divide-gray-200">
-                <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                  <div className="relative">
-                    <input
-                      name="title"
-                      type="text"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                      placeholder="Email address"
-                    />
-                    <label
-                      htmlFor="title"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Title
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <input
-                      name="content"
-                      type="password"
-                      className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                      placeholder="Password"
-                    />
-                    <label
-                      htmlFor="content"
-                      className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                    >
-                      Content
-                    </label>
-                  </div>
-                  <div className="relative">
-                    <button className="_accent-color-bg text-white rounded-md px-2 py-1">
-                      Submit
-                    </button>
+              <div className="block pl-2 font-semibold text-xl self-start _text-color">
+                <h2 className="leading-relaxed">Create a Post</h2>
+                <p className="text-sm text-gray-500 font-normal leading-relaxed">
+                  Say something interesting about the place you visited!
+                </p>
+              </div>
+            </div>
+            <div className="divide-y divide-gray-200">
+              <div className="py-8 text-base leading-6 space-y-4 _text-color sm:text-lg sm:leading-7">
+                <div className="flex flex-col">
+                  <label className="leading-loose">Post Title</label>
+                  <input
+                    type="text"
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Event title"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Post Content</label>
+                  <input
+                    type="text"
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Optional"
+                  />
+                </div>
+                <div className="flex items-center space-x-4">
+                  <div className="flex flex-col">
+                    <label className="leading-loose">Image link</label>
+                    <div className="relative focus-within:text-gray-600 text-gray-400">
+                      <input
+                        type="text"
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="Link"
+                      />
+                    </div>
                   </div>
                 </div>
+              </div>
+              <div className="pt-4 flex items-center space-x-4">
+                <button onClick={closeModal} className="flex justify-center items-center w-full _text-color px-4 py-3 rounded-md focus:outline-none">
+                  <svg
+                    className="w-6 h-6 mr-3"
+                    fill="none"
+                    stroke="rgba(0,0,0,0.68)"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M6 18L18 6M6 6l12 12"
+                    ></path>
+                  </svg>
+                  Cancel
+                </button>
+                <button className="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" type="submit">
+                  Create
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
