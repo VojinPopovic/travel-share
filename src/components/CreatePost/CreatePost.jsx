@@ -1,13 +1,38 @@
-import CloseModal from "../../../public/closeModalImage.svg";
+import { useSession } from "next-auth/react";
 
-export default function CreatePost({ setRenderPost }) {
+export default function CreatePost({ setRenderPost, group }) {
+  const session = useSession();
+
   function closeModal() {
     setRenderPost(false);
   }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const title = e.target[0].value;
+    const content = e.target[1].value;
+    const img = e.target[2].value;
+
+    try {
+      await fetch("/api/posts", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          content,
+          img,
+          username: session.data.user.name,
+          group: group,
+        }),
+      });
+      e.target.reset();
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
-    <form
+    <div
       onClick={closeModal}
-      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12 z-10"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -16,7 +41,7 @@ export default function CreatePost({ setRenderPost }) {
         <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">
             <div className="flex items-center space-x-5">
-              <div className="h-14 w-14 _card-gradient rounded-full flex flex-shrink-0 justify-center items-center _text-color text-2xl font-mono">
+              <div className="h-14 w-14 _accent-color-bg rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
                 i
               </div>
               <div className="block pl-2 font-semibold text-xl self-start _text-color">
@@ -26,39 +51,38 @@ export default function CreatePost({ setRenderPost }) {
                 </p>
               </div>
             </div>
-            <div className="divide-y divide-gray-200">
+            <form onSubmit={handleSubmit} className="divide-y divide-gray-200">
               <div className="py-8 text-base leading-6 space-y-4 _text-color sm:text-lg sm:leading-7">
                 <div className="flex flex-col">
                   <label className="leading-loose">Post Title</label>
                   <input
                     type="text"
                     className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                    placeholder="Event title"
+                    placeholder="Title"
                   />
                 </div>
                 <div className="flex flex-col">
                   <label className="leading-loose">Post Content</label>
+                  <textarea
+                    type="text"
+                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    placeholder="Message"
+                  />
+                </div>
+                <div className="flex flex-col">
+                  <label className="leading-loose">Image</label>
                   <input
                     type="text"
                     className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                    placeholder="Optional"
+                    placeholder="Image link"
                   />
-                </div>
-                <div className="flex items-center space-x-4">
-                  <div className="flex flex-col">
-                    <label className="leading-loose">Image link</label>
-                    <div className="relative focus-within:text-gray-600 text-gray-400">
-                      <input
-                        type="text"
-                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Link"
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
               <div className="pt-4 flex items-center space-x-4">
-                <button onClick={closeModal} className="flex justify-center items-center w-full _text-color px-4 py-3 rounded-md focus:outline-none">
+                <button
+                  onClick={closeModal}
+                  className="flex justify-center items-center w-full _text-color px-4 py-3 rounded-md focus:outline-none"
+                >
                   <svg
                     className="w-6 h-6 mr-3"
                     fill="none"
@@ -67,22 +91,25 @@ export default function CreatePost({ setRenderPost }) {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M6 18L18 6M6 6l12 12"
                     ></path>
                   </svg>
                   Cancel
                 </button>
-                <button className="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" type="submit">
+                <button
+                  className="_accent-color-bg flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                  type="submit"
+                >
                   Create
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 }

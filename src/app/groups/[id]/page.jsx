@@ -34,7 +34,7 @@ export default function page({ params }) {
   } else {
     return (
       <MainDiv>
-        <div className="relative w-full h-[400px] border-b-2 border-[rgba(0,0,0,0.68)]">
+        <div className="relative w-full h-[200px] border-b-2 border-[rgba(0,0,0,0.68)]">
           <div className="absolute bottom-0 left-0 w-1/3 max-w-[200px] flex justify-start items-center mb-4 ml-4">
             <div className="h-[70px] aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden mr-2">
               <Image
@@ -61,7 +61,7 @@ export default function page({ params }) {
           })}
         </section>
         {renderPost === true ? (
-          <CreatePost setRenderPost={setRenderPost} />
+          <CreatePost setRenderPost={setRenderPost} group={params.id}/>
         ) : (
           ""
         )}
