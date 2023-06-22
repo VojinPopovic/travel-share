@@ -18,7 +18,6 @@ const postSchema = new Schema(
     },
     username: {
       type: String,
-      unique: true,
       required: true,
     },
     group: {
