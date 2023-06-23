@@ -64,7 +64,7 @@ export default function Home() {
                   Sign up!
                 </button>
                 <button
-                  onClick={signIn("google")}
+                  onClick={() => signIn("google")}
                   className="_button min-w-[100px] _second-accent-color-bg _text-color"
                 >
                   Log in
