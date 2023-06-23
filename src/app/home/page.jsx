@@ -13,15 +13,13 @@ import SavedIcon from "../../../public/savedIcon.svg";
 import Post from "@/components/Post/Post";
 import Link from "next/link";
 import Loading from "../loading";
+import { CreateUser } from "@/components/CreateUser/CreateUser";
 
 export default function Home() {
   const session = useSession();
-  console.log(session.status);
-
   const router = useRouter();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
   const { data, isLoading } = useSWR("/api/posts/group", fetcher);
 
   if (session.status === "unauthenticated") {
@@ -32,6 +30,9 @@ export default function Home() {
   if (isLoading) {
     return <Loading />;
   } else if (session.status === "authenticated" && !isLoading) {
+    setTimeout(() => {
+      CreateUser(session);
+    });
     return (
       <MainDiv>
         <div className="relative w-full h-[393.75px]">
