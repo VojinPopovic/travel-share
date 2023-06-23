@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import Post from "@/models/Post";
+import Posts from "@/models/Post";
 import connect from "@/utils/db";
 
 export async function GET(request){
@@ -8,7 +8,7 @@ export async function GET(request){
   const group = url.searchParams.get("group");
   try {
     await connect();
-    const posts = await Post.find(group && { group });
+    const posts = await Posts.find(group && { group });
     return new NextResponse(JSON.stringify(posts), { status: 200 });
   } catch (err) {
     console.log(err);

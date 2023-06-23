@@ -2,8 +2,8 @@ import User from "@/models/User";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
-export const POST = async (request) => {
-  const { username, email, img} = await request.json();
+export async function POST(request) {
+  const { username, email, img } = await request.json();
 
   await connect();
 
@@ -11,9 +11,9 @@ export const POST = async (request) => {
     username,
     email,
     img,
-    friends:  "Vuk",
-    groups:  "japan",
-    saved:  "something"
+    friends: "Vuk",
+    groups: "japan",
+    saved: "something",
   });
   try {
     await newUser.save();
@@ -25,4 +25,5 @@ export const POST = async (request) => {
       status: 500,
     });
   }
-};
+}
+
