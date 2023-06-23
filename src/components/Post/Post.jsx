@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import ProfileIcon from "../../../public/profileIcon.svg";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -34,11 +33,13 @@ export default function Post({ post }) {
     <div className="w-full _post-border rounded-lg mt-5">
       <div className="flex justify-between py-3 px-4">
         <div className="flex flex-col justify-start w-[10%] pr-4 gap-2">
-          <div className="w-full">
+          <div className="w-full rounded-full overflow-hidden">
             <Link href="/">
               <Image
                 className="w-full mx-auto"
-                src={ProfileIcon}
+                src={post.userimage}
+                width={40}
+                height={40}
                 alt=""
               ></Image>
             </Link>

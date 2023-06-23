@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema, model, models } = mongoose;
 
-const postSchema = new Schema(
+const postsSchema = new Schema(
   {
     title: {
       type: String,
@@ -20,6 +20,10 @@ const postSchema = new Schema(
       type: String,
       required: true,
     },
+    userimage: {
+      type: String,
+      required: true,
+    },
     group: {
       type: String,
       required: true,
@@ -28,5 +32,5 @@ const postSchema = new Schema(
   { timestamps: true }
 );
 
-const Post = models.Post || model("Post", postSchema);
-export default Post;
+const Posts = models.Posts || model("Posts", postsSchema);
+export default Posts;

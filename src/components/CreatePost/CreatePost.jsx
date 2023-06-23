@@ -8,7 +8,6 @@ export default function CreatePost({ setRenderPost, group }) {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
     const title = e.target[0].value;
     const content = e.target[1].value;
     const img = e.target[2].value;
@@ -21,6 +20,7 @@ export default function CreatePost({ setRenderPost, group }) {
           content,
           img,
           username: session.data.user.name,
+          userimage: session.data.user.image,
           group: group,
         }),
       });
