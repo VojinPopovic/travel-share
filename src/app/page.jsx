@@ -11,9 +11,10 @@ import Loading from "./loading";
 export default function Home() {
   const session = useSession();
   const router = useRouter();
+  console.log(session.status);
 
   if (session.status === "authenticated") {
-    setTimeout(() => {
+    setTimeout(async function () {
       router?.push("/home");
     });
   }
@@ -21,7 +22,6 @@ export default function Home() {
   if (session.status === "loading") {
     return <Loading />;
   }
-
   if (session.status === "unauthenticated") {
     return (
       <>
@@ -64,7 +64,7 @@ export default function Home() {
                   Sign up!
                 </button>
                 <button
-                  onClick={() => signIn("google")}
+                  onClick={signIn("google")}
                   className="_button min-w-[100px] _second-accent-color-bg _text-color"
                 >
                   Log in
