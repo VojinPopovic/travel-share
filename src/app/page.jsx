@@ -7,6 +7,7 @@ import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/Navbar/Navbar";
 import Loading from "./loading";
+import Footer from "@/components/Footer/Footer";
 
 export default function Home() {
   const session = useSession();
@@ -80,6 +81,7 @@ export default function Home() {
               ></Image>
             </div>
           </div>
+          <Footer />
         </main>
       </>
     );
