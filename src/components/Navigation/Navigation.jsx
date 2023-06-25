@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Image from "next/image";
 import FriendsIcon from "../../../public/friendsIcon.svg";
@@ -7,6 +7,7 @@ import SavedIcon from "../../../public/savedIcon.svg";
 import BackArrowIcon from "../../../public/backArrowIcon.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
+import ProfileIcon from "../../../public/profileIcon.svg";
 
 export default function Navigation({ previousPage }) {
   const session = useSession();
@@ -62,7 +63,11 @@ export default function Navigation({ previousPage }) {
           <Link href={`/profile/${session?.data?.user?.email}`}>
             <Image
               className="w-full h-full object-cover"
-              src={session?.data?.user?.image}
+              src={
+                session.status === "authenticated"
+                  ? session?.data?.user?.image
+                  : ProfileIcon
+              }
               width={50}
               height={50}
               alt=""
