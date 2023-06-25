@@ -59,10 +59,10 @@ export default function Navigation({ previousPage }) {
           </Link>
         </div>
         <div className="w-[35px] aspect-square rounded-full overflow-hidden flex items-center justify-center">
-          <Link href={`/profile/${session.data.user.email}`}>
+          <Link href={`/profile/${session?.data?.user?.email}`}>
             <Image
               className="w-full h-full object-cover"
-              src={session.data.user.image}
+              src={session?.data?.user?.image}
               width={50}
               height={50}
               alt=""
