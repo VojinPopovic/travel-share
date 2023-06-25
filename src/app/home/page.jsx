@@ -3,7 +3,6 @@
 import useSWR from "swr";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { signOut } from "next-auth/react";
 import Image from "next/image";
 import MainDiv from "@/components/MainDiv/MainDiv";
 import BackgroundImage from "../../../public/homeBackgroundImage.jpg";
@@ -14,6 +13,7 @@ import Post from "@/components/Post/Post";
 import Link from "next/link";
 import Loading from "../loading";
 import { CreateUser } from "@/components/CreateUser/CreateUser";
+import SearchBar from "@/components/SearchBar/SearchBar";
 
 export default function Home() {
   const session = useSession();
@@ -36,6 +36,20 @@ export default function Home() {
     return (
       <MainDiv>
         <div className="relative w-full h-[393.75px]">
+          <div className="w-full mx-auto pt-4 px-3 flex items-center justify-between">
+            <div className="w-[60px] aspect-square rounded-full overflow-hidden flex items-center justify-center">
+              <Link href={`/profile/${session?.data?.user?.email}`}>
+                <Image
+                  className="w-full h-full object-cover"
+                  src={session?.data?.user?.image}
+                  width={100}
+                  height={100}
+                  alt=""
+                ></Image>
+              </Link>
+            </div>
+            <SearchBar />
+          </div>
           <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)] rounded-xl overflow-hidden">
             <Image
               className="object-cover"
@@ -84,9 +98,6 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <button className="bg-green-400 absolute top-0" onClick={signOut}>
-          Sign Out
-        </button>
         <section className="w-full px-[3%] pb-4">
           <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
           {data?.map((post) => {

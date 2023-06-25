@@ -14,7 +14,6 @@ import { signOut } from "next-auth/react";
 export default function Profile({ params }) {
   const [renderPost, setRenderPost] = useState(false);
   const email = decodeURI(params.id).replaceAll("%40", "@");
-  console.log(email)
   const session = useSession();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
