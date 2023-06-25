@@ -6,7 +6,6 @@ export default function Post({ post }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
@@ -34,12 +33,12 @@ export default function Post({ post }) {
       <div className="flex justify-between py-3 px-4">
         <div className="flex flex-col justify-start w-[10%] pr-4 gap-2">
           <div className="w-full rounded-full overflow-hidden">
-            <Link href="/">
+            <Link href={`/profile/${post.email}`}>
               <Image
                 className="w-full mx-auto"
                 src={post.userimage}
-                width={40}
-                height={40}
+                width={50}
+                height={50}
                 alt=""
               ></Image>
             </Link>

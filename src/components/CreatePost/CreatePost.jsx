@@ -19,7 +19,7 @@ export default function CreatePost({ setRenderPost, group }) {
           title,
           content,
           img,
-          username: session.data.user.name,
+          email: session.data.user.email,
           userimage: session.data.user.image,
           group: group,
         }),

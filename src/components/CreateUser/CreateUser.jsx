@@ -4,7 +4,6 @@ export async function CreateUser(session) {
   const img = session.data.user.image;
 
   try {
-    console.log(username, email, img);
     await fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify({

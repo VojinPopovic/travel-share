@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema, model, models } = mongoose;
 
-const postsSchema = new Schema(
+const postSchema = new Schema(
   {
     title: {
       type: String,
@@ -16,7 +16,7 @@ const postsSchema = new Schema(
       type: String,
       required: true,
     },
-    username: {
+    email: {
       type: String,
       required: true,
     },
@@ -32,5 +32,5 @@ const postsSchema = new Schema(
   { timestamps: true }
 );
 
-const Posts = models.Posts || model("Posts", postsSchema);
-export default Posts;
+const Post = models.Post || model("Post", postSchema);
+export default Post;
