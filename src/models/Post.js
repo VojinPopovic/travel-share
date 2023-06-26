@@ -14,7 +14,6 @@ const postSchema = new Schema(
     },
     img: {
       type: String,
-      required: true,
     },
     email: {
       type: String,
