@@ -11,15 +11,17 @@ import Navigation from "@/components/Navigation/Navigation";
 
 export default function Group({ params }) {
   const [renderPost, setRenderPost] = useState(false);
+  const id = decodeURI(params.id);
+  console.log(id);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
   const { data: groupPostsData, isLoading: isGroupPostsLoading } = useSWR(
-    `/api/posts/group?group=${params.id}`,
+    `/api/posts/group?group=${id}`,
     fetcher
   );
 
-  const idToUpper = params.id.charAt(0).toUpperCase() + params.id.slice(1);
+  const idToUpper = id.charAt(0).toUpperCase() + id.slice(1);
   const { data: imageData, isLoading: isImageLoading } = useSWR(
     `https://restcountries.com/v3.1/name/${idToUpper}`,
     fetcher
@@ -35,17 +37,17 @@ export default function Group({ params }) {
     return (
       <MainDiv>
         <div className="relative w-full h-[200px] border-b-2 border-[rgba(0,0,0,0.68)]">
-          <div className="absolute bottom-0 left-0 w-1/3 max-w-[200px] flex justify-start items-center mb-4 ml-4">
-            <div className="h-[70px] aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden mr-2">
+          <div className="absolute bottom-0 left-0 w-full flex justify-start items-center mb-4 ml-4">
+            <div className="h-[80px] aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden mr-2">
               <Image
                 className="w-full h-full mx-auto rounded-lg object-cover"
                 src={imageData[0]?.flags.svg}
-                width={40}
-                height={40}
+                width={100}
+                height={100}
                 alt=""
               ></Image>
             </div>
-            <p className="text-2xl _text-color font-semibold">{idToUpper}</p>
+            <p className="text-2xl _text-color font-semibold whitespace-nowrap">{idToUpper}</p>
           </div>
         </div>
         <section className="w-full px-[3%] pb-4">
@@ -61,7 +63,7 @@ export default function Group({ params }) {
           })}
         </section>
         {renderPost === true ? (
-          <CreatePost setRenderPost={setRenderPost} group={params.id}/>
+          <CreatePost setRenderPost={setRenderPost} group={params.id} />
         ) : (
           ""
         )}

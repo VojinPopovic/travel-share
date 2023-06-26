@@ -3,6 +3,7 @@ import MainDiv from "@/components/MainDiv/MainDiv";
 import { v4 as uuidv4 } from "uuid";
 import Link from "next/link";
 import Navigation from "@/components/Navigation/Navigation";
+import Image from "next/image";
 
 export async function getGroups() {
   const res = await fetch("https://restcountries.com/v3.1/all", {
@@ -20,25 +21,27 @@ export default async function Groups() {
         <p className="font-semibold text-2xl _text-color mb-3">Browse groups</p>
         {data?.map((item) => {
           return (
-            <div
-              key={uuidv4()}
-              className="relative w-full mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl"
-            >
-              <div className="w-[10%] aspect-square rounded-full m-3 overflow-hidden">
-                <Link href={`/groups/${item.name.common.toLowerCase()}`}>
-                  <img
+            <Link href={`/groups/${item.name.common.toLowerCase()}`}>
+              <div
+                key={uuidv4()}
+                className="relative w-full mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl"
+              >
+                <div className="w-1/12 aspect-square rounded-full m-3 overflow-hidden">
+                  <Image
                     className="w-full h-full mx-auto object-cover"
                     src={item.flags.svg}
+                    width={100}
+                    height={100}
                     alt=""
-                  ></img>
-                </Link>
+                  ></Image>
+                </div>
+                <p className="_text-color font-semibold">{item.name.common}</p>
               </div>
-              <p className="_text-color font-semibold">{item.name.common}</p>
-            </div>
+            </Link>
           );
         })}
       </div>
-      <Navigation previousPage="/home"/>
+      <Navigation previousPage="/home" />
     </MainDiv>
   );
 }
