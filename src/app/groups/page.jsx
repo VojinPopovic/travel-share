@@ -21,9 +21,8 @@ export default async function Groups() {
         <p className="font-semibold text-2xl _text-color mb-3">Browse groups</p>
         {data?.map((item) => {
           return (
-            <Link href={`/groups/${item.name.common.toLowerCase()}`}>
+            <Link key={uuidv4()} href={`/groups/${item.name.common.toLowerCase()}`}>
               <div
-                key={uuidv4()}
                 className="relative w-full mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl"
               >
                 <div className="w-1/12 aspect-square rounded-full m-3 overflow-hidden">
