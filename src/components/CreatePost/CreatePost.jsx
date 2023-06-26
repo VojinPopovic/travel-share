@@ -21,7 +21,7 @@ export default function CreatePost({ setRenderPost, group }) {
           img,
           email: session.data.user.email,
           userimage: session.data.user.image,
-          group: group,
+          group: group.replaceAll("%20", " "),
         }),
       });
       e.target.reset();
