@@ -5,12 +5,12 @@ import Loading from "@/app/loading";
 import MainDiv from "@/components/MainDiv/MainDiv";
 import Image from "next/image";
 import Post from "@/components/Post/Post";
-import GroupCard from "@/components/GroupCard/GroupCard";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import GroupRenderer from "@/components/GroupRenderer/GroupRenderer";
+import { v4 as uuidv4 } from "uuid";
 
 export default function Profile({ params }) {
   const [renderPost, setRenderPost] = useState(false);
@@ -85,7 +85,7 @@ export default function Profile({ params }) {
             </p>
           </div>
           {groupData?.map((group) => {
-            return <GroupRenderer group={group} />;
+            return <GroupRenderer key={uuidv4()} group={group} />;
           })}
         </section>
         <Navigation previousPage="/home"></Navigation>

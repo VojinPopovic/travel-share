@@ -1,11 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
-import { v4 as uuidv4 } from "uuid";
 
 export default async function GroupCard({ item }) {
   return (
     <>
-      <Link key={uuidv4()} href={`/groups/${item.name.common.toLowerCase()}`}>
+      <Link href={`/groups/${item.name.common.toLowerCase()}`}>
         <div className="relative w-full mx-auto flex justify-start items-center _post-border mb-3 rounded-2xl">
           <div className="w-1/12 aspect-square rounded-full m-3 overflow-hidden">
             <Image

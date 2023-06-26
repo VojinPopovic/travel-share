@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import GroupCard from "../GroupCard/GroupCard";
-import { v4 as uuidv4 } from "uuid";
 
 export default function GroupRenderer({ group }) {
   const [data, setData] = useState([]);
@@ -31,7 +30,7 @@ export default function GroupRenderer({ group }) {
   return (
     <>
       {data?.map((item) => {
-        return <GroupCard key={uuidv4()} item={item} />;
+        return <GroupCard item={item} />;
       })}
     </>
   );
