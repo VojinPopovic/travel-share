@@ -17,10 +17,14 @@ export default function Profile({ params }) {
   const session = useSession();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading } = useSWR(
+  const { data, isLoading, mutate } = useSWR(
     `/api/posts/email?email=${email}`,
     fetcher
   );
+
+  function reloadData(){
+    mutate()
+  }
 
   if (isLoading || session.status === "loading") {
     <Loading />;
@@ -62,7 +66,7 @@ export default function Profile({ params }) {
             </p>
           </div>
           {data?.map((post) => {
-            return <Post post={post} key={post._id}></Post>;
+            return <Post post={post} key={post._id} reloadData={reloadData}></Post>;
           })}
           <div className="mt-5 flex gap-2">
             <p className="_text-color text-2xl font-semibold">

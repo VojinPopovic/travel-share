@@ -15,7 +15,7 @@ export default function Group({ params }) {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data: groupPostsData, isLoading: isGroupPostsLoading } = useSWR(
+  const { data: groupPostsData, isLoading: isGroupPostsLoading, mutate } = useSWR(
     `/api/posts/group?group=${id}`,
     fetcher
   );
@@ -25,6 +25,10 @@ export default function Group({ params }) {
     `https://restcountries.com/v3.1/name/${idToUpper}`,
     fetcher
   );
+
+  function reloadData(){
+    mutate()
+  }
 
   function openModal() {
     setRenderPost(true);
@@ -58,7 +62,7 @@ export default function Group({ params }) {
             <button className="_button _card-gradient">Follow group</button>
           </div>
           {groupPostsData?.map((post) => {
-            return <Post post={post} key={post._id}></Post>;
+            return <Post post={post} key={post._id} reloadData={reloadData}></Post>;
           })}
         </section>
         {renderPost === true ? (
