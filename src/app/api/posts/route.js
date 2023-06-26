@@ -1,10 +1,10 @@
-import Posts from "@/models/Post";
+import Post from "@/models/Post";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request){
   const body = await request.json();
-  const newPost = new Posts(body);
+  const newPost = new Post(body);
   try {
     await connect();
     await newPost.save();

@@ -1,11 +1,18 @@
+"use client";
+
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import useSWR from "swr";
+import { useSession } from "next-auth/react";
 
 export default function Post({ post }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const session = useSession();
+  const { mutate } = useSWR();
+
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
@@ -27,9 +34,28 @@ export default function Post({ post }) {
     };
     getData();
   }, [post]);
-          
+
+  async function deletePost() {
+    try {
+      await fetch(`/api/posts/${post._id}`, { method: "DELETE" });
+      mutate();
+    } catch (error) {
+      console.log(err);
+    }
+  }
+
   return (
-    <div className="w-full _post-border rounded-lg mt-5">
+    <div className="relative w-full _post-border rounded-lg mt-5">
+      {session?.data?.user?.email === post.email ? (
+        <div
+          onClick={deletePost}
+          className="absolute top-0 right-0 text-3xl mr-4 mt-2 hover:scale-150 transition duration-500 ease-in-out cursor-pointer"
+        >
+          x
+        </div>
+      ) : (
+        ""
+      )}
       <div className="flex justify-between py-3 px-4">
         <div className="flex flex-col justify-start w-[10%] pr-4 gap-2">
           <div className="w-full rounded-full overflow-hidden">
@@ -56,7 +82,17 @@ export default function Post({ post }) {
         <div className="w-[90%]">
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
-          {post.img !== "" ? <Image src={post.img} width={200} height={150} className="rounded-lg" alt=""></Image>: ""}
+          {post.img !== "" ? (
+            <Image
+              src={post.img}
+              width={300}
+              height={300}
+              className="rounded-lg w-auto h-auto max-h-[300px]"
+              alt=""
+            ></Image>
+          ) : (
+            ""
+          )}
         </div>
       </div>
       <div className="flex pb-3 pl-5">

@@ -12,7 +12,6 @@ import Navigation from "@/components/Navigation/Navigation";
 export default function Group({ params }) {
   const [renderPost, setRenderPost] = useState(false);
   const id = decodeURI(params.id);
-  console.log(id);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
