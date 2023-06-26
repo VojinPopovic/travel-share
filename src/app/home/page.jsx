@@ -36,7 +36,7 @@ export default function Home() {
     return (
       <MainDiv>
         <div className="relative w-full h-[393.75px]">
-          <div className="w-full mx-auto pt-4 px-3 flex items-center justify-between">
+          <div className="w-full mx-auto pt-4 px-[3%] flex items-center justify-between">
             <div className="w-[60px] aspect-square rounded-full overflow-hidden flex items-center justify-center">
               <Link href={`/profile/${session?.data?.user?.email}`}>
                 <Image
@@ -50,12 +50,13 @@ export default function Home() {
             </div>
             <SearchBar />
           </div>
-          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)] rounded-xl overflow-hidden">
+          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)] rounded-b-xl overflow-hidden">
             <Image
               className="object-cover"
               src={BackgroundImage}
               priority={true}
-              fill={true}
+              width={1920}
+              height={1080}
               alt=""
             ></Image>
           </div>
