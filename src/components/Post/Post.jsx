@@ -3,15 +3,13 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useSWR from "swr";
 import { useSession } from "next-auth/react";
 
-export default function Post({ post }) {
+export default function Post({ post, reloadData }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const session = useSession();
-  const { mutate } = useSWR();
 
   useEffect(() => {
     const getData = async () => {
@@ -38,7 +36,7 @@ export default function Post({ post }) {
   async function deletePost() {
     try {
       await fetch(`/api/posts/${post._id}`, { method: "DELETE" });
-      mutate();
+      reloadData()
     } catch (error) {
       console.log(err);
     }

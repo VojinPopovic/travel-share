@@ -19,8 +19,13 @@ export default function Home() {
   const session = useSession();
   const router = useRouter();
 
+
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading } = useSWR("/api/posts/group", fetcher);
+  const { data, isLoading, mutate } = useSWR("/api/posts/group", fetcher);
+
+  function reloadData(){
+    mutate()
+  }
 
   if (session.status === "unauthenticated") {
     setTimeout(() => {
@@ -102,7 +107,7 @@ export default function Home() {
         <section className="w-full px-[3%] pb-4">
           <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
           {data?.map((post) => {
-            return <Post post={post} key={post._id}></Post>;
+            return <Post post={post} reloadData={reloadData} key={post._id}></Post>;
           })}
         </section>
       </MainDiv>
