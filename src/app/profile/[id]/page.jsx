@@ -23,6 +23,7 @@ export default function Profile({ params }) {
     isLoading: isPostLoading,
     mutate,
   } = useSWR(`/api/posts/email?email=${email}`, fetcher);
+  console.log("coa")
 
   const { data: userData, isLoading: isUserLoading } = useSWR(
     `/api/users?email=${email}`,
