@@ -8,17 +8,20 @@ import Post from "@/components/Post/Post";
 import CreatePost from "@/components/CreatePost/CreatePost";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
+import { useSession } from "next-auth/react";
 
 export default function Group({ params }) {
   const [renderPost, setRenderPost] = useState(false);
   const id = decodeURI(params.id);
+  const session = useSession();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
-  const { data: groupPostsData, isLoading: isGroupPostsLoading, mutate } = useSWR(
-    `/api/posts/group?group=${id}`,
-    fetcher
-  );
+  const {
+    data: groupPostsData,
+    isLoading: isGroupPostsLoading,
+    mutate,
+  } = useSWR(`/api/posts/group?group=${id}`, fetcher);
 
   const idToUpper = id.charAt(0).toUpperCase() + id.slice(1);
   const { data: imageData, isLoading: isImageLoading } = useSWR(
@@ -26,12 +29,26 @@ export default function Group({ params }) {
     fetcher
   );
 
-  function reloadData(){
-    mutate()
+  function reloadData() {
+    mutate();
   }
 
   function openModal() {
     setRenderPost(true);
+  }
+
+  async function followHandler() {
+    try {
+      await fetch(`/api/groups/email`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: session?.data?.user?.email,
+          groupname: idToUpper,
+        }),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   if (isGroupPostsLoading || isImageLoading) {
@@ -50,7 +67,9 @@ export default function Group({ params }) {
                 alt=""
               ></Image>
             </div>
-            <p className="text-2xl _text-color font-semibold whitespace-nowrap">{idToUpper}</p>
+            <p className="text-2xl _text-color font-semibold whitespace-nowrap">
+              {idToUpper}
+            </p>
           </div>
         </div>
         <section className="w-full px-[3%] pb-4">
@@ -59,10 +78,14 @@ export default function Group({ params }) {
             <button className="_button _card-gradient" onClick={openModal}>
               Create a post
             </button>
-            <button className="_button _card-gradient">Follow group</button>
+            <button onClick={followHandler} className="_button _card-gradient">
+              Follow group
+            </button>
           </div>
           {groupPostsData?.map((post) => {
-            return <Post post={post} key={post._id} reloadData={reloadData}></Post>;
+            return (
+              <Post post={post} key={post._id} reloadData={reloadData}></Post>
+            );
           })}
         </section>
         {renderPost === true ? (
