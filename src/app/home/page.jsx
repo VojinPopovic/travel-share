@@ -22,6 +22,7 @@ export default function Home() {
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data, isLoading, mutate } = useSWR("/api/posts/group", fetcher);
+  const posts = data?.slice().reverse();
 
   function reloadData(){
     mutate()
@@ -106,7 +107,7 @@ export default function Home() {
         </div>
         <section className="w-full px-[3%] pb-4">
           <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
-          {data?.map((post) => {
+          {posts?.map((post) => {
             return <Post post={post} reloadData={reloadData} key={post._id}></Post>;
           })}
         </section>
