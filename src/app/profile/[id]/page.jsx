@@ -13,7 +13,6 @@ import GroupRenderer from "@/components/GroupRenderer/GroupRenderer";
 import { v4 as uuidv4 } from "uuid";
 
 export default function Profile({ params }) {
-  const [renderPost, setRenderPost] = useState(false);
   const email = decodeURI(params.id).replaceAll("%40", "@");
   const session = useSession();
 
@@ -23,13 +22,13 @@ export default function Profile({ params }) {
     isLoading: isPostLoading,
     mutate,
   } = useSWR(`/api/posts/email?email=${email}`, fetcher);
-  console.log("coa")
+  const posts = postData?.slice().reverse();
 
   const { data: userData, isLoading: isUserLoading } = useSWR(
     `/api/users?email=${email}`,
     fetcher
   );
-  const { data: groupData, isLoading: isGroupLoading } = useSWR(
+  const { data: groupData } = useSWR(
     `/api/groups/email?email=${email}`,
     fetcher
   );
@@ -75,7 +74,7 @@ export default function Profile({ params }) {
           <div className="mt-5 flex gap-2">
             <p className="_text-color text-2xl font-semibold">Posts</p>
           </div>
-          {postData?.map((post) => {
+          {posts?.map((post) => {
             return (
               <Post post={post} key={post._id} reloadData={reloadData}></Post>
             );

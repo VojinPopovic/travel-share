@@ -22,6 +22,7 @@ export default function Group({ params }) {
     isLoading: isGroupPostsLoading,
     mutate,
   } = useSWR(`/api/posts/group?group=${id}`, fetcher);
+  const posts = groupPostsData?.slice().reverse();
 
   const idToUpper = id.charAt(0).toUpperCase() + id.slice(1);
   const { data: imageData, isLoading: isImageLoading } = useSWR(
@@ -82,7 +83,7 @@ export default function Group({ params }) {
               Follow group
             </button>
           </div>
-          {groupPostsData?.map((post) => {
+          {posts?.map((post) => {
             return (
               <Post post={post} key={post._id} reloadData={reloadData}></Post>
             );
