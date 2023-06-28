@@ -16,11 +16,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <GroupsProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <GroupsProvider>
             <Suspense fallback={<Loading />}>{children}</Suspense>
-          </AuthProvider>
-        </GroupsProvider>
+          </GroupsProvider>
+        </AuthProvider>
       </body>
     </html>
   );

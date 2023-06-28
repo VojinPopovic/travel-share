@@ -9,11 +9,14 @@ import CreatePost from "@/components/CreatePost/CreatePost";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
 import { useSession } from "next-auth/react";
+import { useContext } from "react";
+import { GroupsContext } from "@/context/FollowedGroupsContext";
 
 export default function Group({ params }) {
   const [renderPost, setRenderPost] = useState(false);
   const id = decodeURI(params.id);
   const session = useSession();
+  const { setSelectedGroup, groups } = useContext(GroupsContext);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -55,6 +58,12 @@ export default function Group({ params }) {
   if (isGroupPostsLoading || isImageLoading) {
     <Loading />;
   } else {
+    setTimeout(() => {
+      function updateGroups() {
+        setSelectedGroup(idToUpper);
+      }
+      updateGroups();
+    });
     return (
       <MainDiv>
         <div className="relative w-full h-[200px] border-b-2 border-[rgba(0,0,0,0.68)]">
@@ -79,9 +88,21 @@ export default function Group({ params }) {
             <button className="_button _card-gradient" onClick={openModal}>
               Create a post
             </button>
-            <button onClick={followHandler} className="_button _card-gradient">
-              Follow group
-            </button>
+            {groups ? (
+              <button
+                onClick={() => alert("are you sure")}
+                className="_button _card-gradient"
+              >
+                Unfollow
+              </button>
+            ) : (
+              <button
+                onClick={followHandler}
+                className="_button _card-gradient"
+              >
+               Follow the group 
+              </button>
+            )}
           </div>
           {posts?.map((post) => {
             return (
