@@ -42,9 +42,24 @@ export const GroupsProvider = ({ children }) => {
     }
   }
 
+  async function followHandler() {
+    try {
+      await fetch(`/api/groups/email`, {
+        method: "POST",
+        body: JSON.stringify({
+          email: session?.data?.user?.email,
+          groupname: selectedGroup,
+        }),
+      });
+      mutate();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <GroupsContext.Provider
-      value={{ setSelectedGroup, groups, unfollowHandler }}
+      value={{ setSelectedGroup, groups, unfollowHandler, followHandler }}
     >
       {children}
     </GroupsContext.Provider>
