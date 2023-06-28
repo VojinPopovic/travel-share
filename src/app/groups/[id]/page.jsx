@@ -8,17 +8,13 @@ import Post from "@/components/Post/Post";
 import CreatePost from "@/components/CreatePost/CreatePost";
 import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
-import { useSession } from "next-auth/react";
 import { useContext } from "react";
 import { GroupsContext } from "@/context/FollowedGroupsContext";
-import { useRouter } from "next/navigation";
 
 export default function Group({ params }) {
   const [renderPost, setRenderPost] = useState(false);
   const id = decodeURI(params.id);
-  const session = useSession();
-  const router = useRouter()
-  const { setSelectedGroup, groups, unfollowHandler } =
+  const { setSelectedGroup, groups, unfollowHandler, followHandler } =
     useContext(GroupsContext);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -42,21 +38,6 @@ export default function Group({ params }) {
 
   function openModal() {
     setRenderPost(true);
-  }
-
-  async function followHandler() {
-    try {
-      await fetch(`/api/groups/email`, {
-        method: "POST",
-        body: JSON.stringify({
-          email: session?.data?.user?.email,
-          groupname: idToUpper,
-        }),
-      });
-      location.reload()
-    } catch (error) {
-      console.log(error);
-    }
   }
 
   if (isGroupPostsLoading || isImageLoading) {
