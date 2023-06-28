@@ -14,7 +14,7 @@ export const GroupsProvider = ({ children }) => {
   const session = useSession();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data: groupData } = useSWR(
+  const { data: groupData, mutate } = useSWR(
     `/api/groups/email?email=${session?.data?.user?.email}`,
     fetcher
   );
@@ -32,11 +32,11 @@ export const GroupsProvider = ({ children }) => {
     };
     setGroups(groupUpdate(groupData));
   }, [groupData, selectedGroup]);
-  console.log(selectedGroupId);
 
   async function unfollowHandler() {
     try {
       await fetch(`/api/groups/${selectedGroupId}`, { method: "DELETE" });
+      mutate();
     } catch (error) {
       console.log(err);
     }
