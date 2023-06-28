@@ -28,6 +28,7 @@ export default function Profile({ params }) {
     `/api/users?email=${email}`,
     fetcher
   );
+
   const { data: groupData } = useSWR(
     `/api/groups/email?email=${email}`,
     fetcher
@@ -54,8 +55,8 @@ export default function Profile({ params }) {
                   alt=""
                 ></Image>
               </div>
-              <p className="text-md _text-color font-semibold whitespace-nowrap">
-                {email}
+              <p className="text-md _text-color font-semibold whitespace-nowrap text-2xl">
+                {isUserLoading? "" : userData[0]?.username}
               </p>
             </div>
             {session?.data?.user?.email === userData[0]?.email ? (
