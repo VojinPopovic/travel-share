@@ -14,18 +14,29 @@ import Link from "next/link";
 import Loading from "../loading";
 import { CreateUser } from "@/components/CreateUser/CreateUser";
 import SearchBar from "@/components/SearchBar/SearchBar";
+import { useContext } from "react";
+import { GroupsContext } from "@/context/FollowedGroupsContext";
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
-
+  const { groups, setNewGroups } = useContext(GroupsContext);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading, mutate } = useSWR("/api/posts/group", fetcher);
-  const posts = data?.slice().reverse();
+  const {
+    data: postsData,
+    isLoading,
+    mutate,
+  } = useSWR("/api/posts/group", fetcher);
+  const posts = postsData?.slice().reverse();
 
-  function reloadData(){
-    mutate()
+  const { data: groupData } = useSWR(
+    `/api/groups/email?email=${session?.data?.user?.email}`,
+    fetcher
+  );
+
+  function reloadData() {
+    mutate();
   }
 
   if (session.status === "unauthenticated") {
@@ -73,6 +84,8 @@ export default function Home() {
                   <Image
                     className="w-3/5 mx-auto max-h-[100px]"
                     src={FriendsIcon}
+                    width={30}
+                    height={30}
                     alt=""
                   ></Image>
                 </div>
@@ -85,6 +98,8 @@ export default function Home() {
                   <Image
                     className="w-3/5 mx-auto"
                     src={GroupsIcon}
+                    width={30}
+                    height={30}
                     alt=""
                   ></Image>
                 </div>
@@ -97,6 +112,8 @@ export default function Home() {
                   <Image
                     className="w-3/5 mx-auto max-h-[50px]"
                     src={SavedIcon}
+                    width={30}
+                    height={30}
                     alt=""
                   ></Image>
                 </div>
@@ -108,7 +125,9 @@ export default function Home() {
         <section className="w-full px-[3%] pb-4">
           <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
           {posts?.map((post) => {
-            return <Post post={post} reloadData={reloadData} key={post._id}></Post>;
+            return (
+              <Post post={post} reloadData={reloadData} key={post._id}></Post>
+            );
           })}
         </section>
       </MainDiv>

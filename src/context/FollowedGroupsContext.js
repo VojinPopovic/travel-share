@@ -1,19 +1,20 @@
 "use client";
 
 import { createContext } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export const GroupsContext = createContext();
 
 export const GroupsProvider = ({ children }) => {
   const [groups, setGroups] = useState([]);
+  const [newGroups, setNewGroups] = useState("");
 
-  const toggle = () => {
-    setGroups([...groups]);
-  };
+  useEffect(() => {
+    setGroups([...groups, newGroups]);
+  },[newGroups]);
 
   return (
-    <GroupsContext.Provider value={{ toggle, mode }}>
+    <GroupsContext.Provider value={{ groups, setNewGroups }}>
       {children}
     </GroupsContext.Provider>
   );

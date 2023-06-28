@@ -3,6 +3,8 @@ export async function CreateUser(session) {
   const email = session.data.user.email;
   const img = session.data.user.image;
 
+  CreateUser = function () {};
+
   try {
     await fetch("/api/auth/register", {
       method: "POST",
@@ -12,6 +14,7 @@ export async function CreateUser(session) {
         img,
       }),
     });
+    executed = true;
   } catch (err) {
     console.log(err);
   }

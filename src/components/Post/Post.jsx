@@ -81,13 +81,13 @@ export default function Post({ post, reloadData }) {
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
           {post.img !== "" ? (
-            <Image
-              src={post.img}
-              width={300}
-              height={300}
-              className="rounded-lg w-auto h-auto max-h-[300px]"
-              alt=""
-            ></Image>
+              <Image
+                src={post.img}
+                width={300}
+                height={300}
+                className="rounded-lg max-h-[300px] w-auto h-auto"
+                alt=""
+              ></Image>
           ) : (
             ""
           )}
