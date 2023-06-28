@@ -11,12 +11,15 @@ import Navigation from "@/components/Navigation/Navigation";
 import { useSession } from "next-auth/react";
 import { useContext } from "react";
 import { GroupsContext } from "@/context/FollowedGroupsContext";
+import { useRouter } from "next/navigation";
 
 export default function Group({ params }) {
   const [renderPost, setRenderPost] = useState(false);
   const id = decodeURI(params.id);
   const session = useSession();
-  const { setSelectedGroup, groups, unfollowHandler } = useContext(GroupsContext);
+  const router = useRouter()
+  const { setSelectedGroup, groups, unfollowHandler } =
+    useContext(GroupsContext);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -50,6 +53,7 @@ export default function Group({ params }) {
           groupname: idToUpper,
         }),
       });
+      location.reload()
     } catch (error) {
       console.log(error);
     }
@@ -100,7 +104,7 @@ export default function Group({ params }) {
                 onClick={followHandler}
                 className="_button _card-gradient"
               >
-               Follow the group 
+                Follow the group
               </button>
             )}
           </div>
