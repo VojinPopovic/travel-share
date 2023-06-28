@@ -14,23 +14,20 @@ import Link from "next/link";
 import Loading from "../loading";
 import { CreateUser } from "@/components/CreateUser/CreateUser";
 import SearchBar from "@/components/SearchBar/SearchBar";
-import { useContext } from "react";
-import { GroupsContext } from "@/context/FollowedGroupsContext";
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
-  const { groups, setNewGroups } = useContext(GroupsContext);
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
     data: postsData,
-    isLoading,
+    isLoading: isPostsLoading,
     mutate,
   } = useSWR("/api/posts/group", fetcher);
   const posts = postsData?.slice().reverse();
 
-  const { data: groupData } = useSWR(
+  const { data: groupData, isLoading: isGroupsLoading } = useSWR(
     `/api/groups/email?email=${session?.data?.user?.email}`,
     fetcher
   );
@@ -44,9 +41,14 @@ export default function Home() {
       router?.push("/");
     });
   }
-  if (isLoading) {
+
+  if (isPostsLoading || isGroupsLoading) {
     return <Loading />;
-  } else if (session.status === "authenticated" && !isLoading) {
+  } else if (
+    session.status === "authenticated" &&
+    !isPostsLoading &&
+    !isGroupsLoading
+  ) {
     setTimeout(() => {
       CreateUser(session);
     });

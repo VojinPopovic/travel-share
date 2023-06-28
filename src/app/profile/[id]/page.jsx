@@ -5,7 +5,6 @@ import Loading from "@/app/loading";
 import MainDiv from "@/components/MainDiv/MainDiv";
 import Image from "next/image";
 import Post from "@/components/Post/Post";
-import { useState } from "react";
 import Navigation from "@/components/Navigation/Navigation";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";

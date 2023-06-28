@@ -14,7 +14,6 @@ export async function CreateUser(session) {
         img,
       }),
     });
-    executed = true;
   } catch (err) {
     console.log(err);
   }
