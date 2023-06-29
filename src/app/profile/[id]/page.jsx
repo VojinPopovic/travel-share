@@ -131,7 +131,7 @@ export default function Profile({ params }) {
           </form>
           <div className="mt-4">
             {commentData?.map((comment) => {
-              return <Comment key={comment._id} post={comment} reloadData={reloadData} />;
+              return <Comment key={comment._id} post={comment} profileEmail={email} />;
             })}
           </div>
         </section>

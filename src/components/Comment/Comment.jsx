@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
-export default function Comment({ post }) {
+export default function Comment({ post, profileEmail }) {
   const session = useSession();
 
   async function deleteComment() {
@@ -21,7 +21,7 @@ export default function Comment({ post }) {
       key={post._id}
       className="relative w-full _post-border rounded-lg mt-5"
     >
-      {session?.data?.user?.email === post.email ? (
+      {session?.data?.user?.email === post.commentmaker || session?.data?.user?.email === profileEmail ? (
         <div
           onClick={deleteComment}
           className="absolute top-0 right-0 text-3xl mr-4 mt-2 hover:scale-150 transition duration-500 ease-in-out cursor-pointer"
