@@ -10,6 +10,7 @@ import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import GroupRenderer from "@/components/GroupRenderer/GroupRenderer";
 import { v4 as uuidv4 } from "uuid";
+import { CreateComment } from "@/components/CreateComment/CreateComment";
 
 export default function Profile({ params }) {
   const email = decodeURI(params.id).replaceAll("%40", "@");
@@ -37,7 +38,15 @@ export default function Profile({ params }) {
     mutate();
   }
 
-  if (isUserLoading || session.status === "loading" || isPostLoading) {
+  function postCommentHandler(e) {
+    e.preventDefault();
+    const profileEmail = email;
+    const comment = e.target[0].value;
+    CreateComment(comment, profileEmail, session);
+    e.target[0].value = "";
+  }
+
+  if (isUserLoading || isPostLoading) {
     <Loading />;
   } else {
     return (
@@ -55,7 +64,7 @@ export default function Profile({ params }) {
                 ></Image>
               </div>
               <p className="text-md _text-color font-semibold whitespace-nowrap text-2xl">
-                {isUserLoading? "" : userData[0]?.username}
+                {isUserLoading ? "" : userData[0]?.username}
               </p>
             </div>
             {session?.data?.user?.email === userData[0]?.email ? (
@@ -70,23 +79,50 @@ export default function Profile({ params }) {
             )}
           </div>
         </div>
-        <section className="w-full px-[3%] pb-4">
+        <section className="w-full px-[3%] pb-20">
           <div className="mt-5 flex gap-2">
             <p className="_text-color text-2xl font-semibold">Posts</p>
           </div>
-          {posts?.map((post) => {
-            return (
-              <Post post={post} key={post._id} reloadData={reloadData}></Post>
-            );
-          })}
-          <div className="mt-5 flex gap-2">
+          {posts?.length < 1 ? (
+            <p>Hasn't made any posts yet</p>
+          ) : (
+            posts?.map((post) => {
+              return (
+                <Post post={post} key={post._id} reloadData={reloadData}></Post>
+              );
+            })
+          )}
+          <div className="mt-5 flex">
             <p className="_text-color text-2xl font-semibold mb-4">
               Followed groups
             </p>
           </div>
-          {groupData?.map((group) => {
-            return <GroupRenderer key={uuidv4()} group={group} />;
-          })}
+          {groupData?.length < 1 ? (
+            <p>Not following any groups</p>
+          ) : (
+            groupData?.map((group) => {
+              return <GroupRenderer key={uuidv4()} group={group} />;
+            })
+          )}
+          <div className="mt-5 flex">
+            <p className="_text-color text-2xl font-semibold mb-4">Comments</p>
+          </div>
+          <form onSubmit={postCommentHandler}>
+            <div className="flex flex-col">
+              <label className="leading-loose _text-color">Post Comment</label>
+              <textarea
+                type="text"
+                className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                placeholder="Title"
+              />
+            </div>
+            <button
+              className="_accent-color-bg justify-center items-center w-max-[200px] text-white px-4 py-3 mt-3 rounded-md focus:outline-none"
+              type="submit"
+            >
+              Create
+            </button>
+          </form>
         </section>
         <Navigation previousPage="/home"></Navigation>
       </MainDiv>

@@ -1,4 +1,4 @@
-import Group from "@/models/Group";
+import Comment from "@/models/Comments";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
@@ -8,8 +8,8 @@ export async function GET(request){
   const email = url.searchParams.get("email");
   try {
     await connect();
-    const groups = await Group.find(email && { email });
-    return new NextResponse(JSON.stringify(groups), { status: 200 });
+    const comments = await Comment.find(email && { email });
+    return new NextResponse(JSON.stringify(comments), { status: 200 });
   } catch (err) {
     console.log(err);
     return new NextResponse("Database Error", { status: 500 });
@@ -17,14 +17,14 @@ export async function GET(request){
 };
 
 export async function POST(request) {
-  const { email, groupname } = await request.json();
+  const { email, comment } = await request.json();
 
   try {
     await connect();
 
-    await Group.findOneAndUpdate(
-      { email, groupname },
-      { email, groupname },
+    await Comment.findOneAndUpdate(
+      { email, comment },
+      { email, comment },
       { upsert: true }
     );
     return new NextResponse("User has been created", {

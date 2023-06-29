@@ -15,3 +15,23 @@ export async function GET(request){
     return new NextResponse("Database Error", { status: 500 });
   }
 };
+export async function POST(request) {
+  const { email, groupname } = await request.json();
+
+  try {
+    await connect();
+
+    await Group.findOneAndUpdate(
+      { email, groupname },
+      { email, groupname },
+      { upsert: true }
+    );
+    return new NextResponse("User has been created", {
+      status: 201,
+    });
+  } catch (err) {
+    return new NextResponse(err, {
+      status: 500,
+    });
+  }
+}
