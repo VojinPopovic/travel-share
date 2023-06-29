@@ -93,9 +93,8 @@ export default function Post({ post, reloadData }) {
           )}
         </div>
       </div>
-      <div className="flex pb-3 pl-5">
-        <div>❤️</div>
-        <p className="_text-color font-medium">2200 likes</p>
+      <div className="ml-[calc(10%+13px)] mb-4">
+        <button className="_button _card-gradient">Comments</button>
       </div>
     </div>
   );

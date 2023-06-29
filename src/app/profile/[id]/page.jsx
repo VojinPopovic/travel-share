@@ -42,6 +42,9 @@ export default function Profile({ params }) {
   );
 
   function reloadData() {
+    mutate()
+  }
+  function reloadComments() {
     setTimeout(() => commentsMutate(), "1000");
   }
 
@@ -116,7 +119,7 @@ export default function Profile({ params }) {
           </div>
           <form
             onSubmit={(e) => {
-              postCommentHandler(e), reloadData();
+              postCommentHandler(e), reloadComments();
             }}
           >
             <div className="flex flex-col">
@@ -141,7 +144,7 @@ export default function Profile({ params }) {
                   key={comment._id}
                   post={comment}
                   profileEmail={email}
-                  reloadData={reloadData}
+                  reloadData={reloadComments}
                 />
               );
             })}
