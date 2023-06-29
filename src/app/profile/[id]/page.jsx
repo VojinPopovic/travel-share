@@ -84,7 +84,7 @@ export default function Profile({ params }) {
             <p className="_text-color text-2xl font-semibold">Posts</p>
           </div>
           {posts?.length < 1 ? (
-            <p>Hasn't made any posts yet</p>
+            <p>Hasn&apos;t made any posts yet</p>
           ) : (
             posts?.map((post) => {
               return (
