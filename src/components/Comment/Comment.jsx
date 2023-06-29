@@ -4,13 +4,13 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
-export default function Comment({ post, profileEmail }) {
+export default function Comment({ post, profileEmail, reloadData }) {
   const session = useSession();
 
   async function deleteComment() {
     try {
       await fetch(`/api/comments/profile/${post._id}`, { method: "DELETE" });
-      location.reload();
+      reloadData()
     } catch (error) {
       console.log(error);
     }
@@ -21,7 +21,8 @@ export default function Comment({ post, profileEmail }) {
       key={post._id}
       className="relative w-full _post-border rounded-lg mt-5"
     >
-      {session?.data?.user?.email === post.commentmaker || session?.data?.user?.email === profileEmail ? (
+      {session?.data?.user?.email === post.commentmaker ||
+      session?.data?.user?.email === profileEmail ? (
         <div
           onClick={deleteComment}
           className="absolute top-0 right-0 text-3xl mr-4 mt-2 hover:scale-150 transition duration-500 ease-in-out cursor-pointer"
