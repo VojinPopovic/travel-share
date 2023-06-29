@@ -42,8 +42,7 @@ export default function Profile({ params }) {
   );
 
   function reloadData() {
-    mutate()
-    commentsMutate()
+    setTimeout(() => commentsMutate(), "1000");
   }
 
   function postCommentHandler(e) {
@@ -52,7 +51,6 @@ export default function Profile({ params }) {
     const comment = e.target[0].value;
     CreateComment(comment, profileEmail, session);
     e.target[0].value = "";
-    commentsMutate()
   }
 
   if (isUserLoading || isPostLoading) {
@@ -116,7 +114,11 @@ export default function Profile({ params }) {
           <div className="mt-5 flex">
             <p className="_text-color text-2xl font-semibold mb-4">Comments</p>
           </div>
-          <form onSubmit={postCommentHandler}>
+          <form
+            onSubmit={(e) => {
+              postCommentHandler(e), reloadData();
+            }}
+          >
             <div className="flex flex-col">
               <label className="leading-loose _text-color">Post Comment</label>
               <textarea
