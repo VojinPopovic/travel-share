@@ -89,11 +89,15 @@ export default function Group({ params }) {
               </button>
             )}
           </div>
-          {posts?.map((post) => {
-            return (
-              <Post post={post} key={post._id} reloadData={reloadData}></Post>
-            );
-          })}
+          {posts?.length < 1 ? (
+            <p className="mt-5 _text-color">There are no posts in this group, be the first to make one!</p>
+          ) : (
+            posts?.map((post) => {
+              return (
+                <Post post={post} key={post._id} reloadData={reloadData}></Post>
+              );
+            })
+          )}
         </section>
         {renderPost === true ? (
           <CreatePost setRenderPost={setRenderPost} group={params.id} />

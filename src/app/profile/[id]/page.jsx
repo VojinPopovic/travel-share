@@ -11,10 +11,12 @@ import { signOut } from "next-auth/react";
 import GroupRenderer from "@/components/GroupRenderer/GroupRenderer";
 import { CreateComment } from "@/components/CreateComment/CreateComment";
 import Comment from "@/components/Comment/Comment";
+import { useRouter } from "next/navigation";
 
 export default function Profile({ params }) {
   const email = decodeURI(params.id).replaceAll("%40", "@");
   const session = useSession();
+  const router = useRouter();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
@@ -34,13 +36,14 @@ export default function Profile({ params }) {
     fetcher
   );
 
-  const { data: commentData} = useSWR(
+  const { data: commentData, mutate: commentsMutate } = useSWR(
     `/api/comments/profile?email=${email}`,
     fetcher
   );
 
   function reloadData() {
-    mutate();
+    mutate()
+    commentsMutate()
   }
 
   function postCommentHandler(e) {
@@ -49,7 +52,7 @@ export default function Profile({ params }) {
     const comment = e.target[0].value;
     CreateComment(comment, profileEmail, session);
     e.target[0].value = "";
-    location.reload()
+    commentsMutate()
   }
 
   if (isUserLoading || isPostLoading) {
@@ -131,7 +134,14 @@ export default function Profile({ params }) {
           </form>
           <div className="mt-4">
             {commentData?.map((comment) => {
-              return <Comment key={comment._id} post={comment} profileEmail={email} />;
+              return (
+                <Comment
+                  key={comment._id}
+                  post={comment}
+                  profileEmail={email}
+                  reloadData={reloadData}
+                />
+              );
             })}
           </div>
         </section>
