@@ -9,8 +9,8 @@ import Navigation from "@/components/Navigation/Navigation";
 import { useSession } from "next-auth/react";
 import { signOut } from "next-auth/react";
 import GroupRenderer from "@/components/GroupRenderer/GroupRenderer";
-import { v4 as uuidv4 } from "uuid";
 import { CreateComment } from "@/components/CreateComment/CreateComment";
+import Comment from "@/components/Comment/Comment";
 
 export default function Profile({ params }) {
   const email = decodeURI(params.id).replaceAll("%40", "@");
@@ -34,6 +34,11 @@ export default function Profile({ params }) {
     fetcher
   );
 
+  const { data: commentData} = useSWR(
+    `/api/comments/profile?email=${email}`,
+    fetcher
+  );
+
   function reloadData() {
     mutate();
   }
@@ -44,6 +49,7 @@ export default function Profile({ params }) {
     const comment = e.target[0].value;
     CreateComment(comment, profileEmail, session);
     e.target[0].value = "";
+    location.reload()
   }
 
   if (isUserLoading || isPostLoading) {
@@ -101,7 +107,7 @@ export default function Profile({ params }) {
             <p>Not following any groups</p>
           ) : (
             groupData?.map((group) => {
-              return <GroupRenderer key={uuidv4()} group={group} />;
+              return <GroupRenderer key={group._id} group={group} />;
             })
           )}
           <div className="mt-5 flex">
@@ -123,6 +129,11 @@ export default function Profile({ params }) {
               Create
             </button>
           </form>
+          <div className="mt-4">
+            {commentData?.map((comment) => {
+              return <Comment key={comment._id} post={comment} reloadData={reloadData} />;
+            })}
+          </div>
         </section>
         <Navigation previousPage="/home"></Navigation>
       </MainDiv>

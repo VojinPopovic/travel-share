@@ -9,15 +9,18 @@ export default function Comment({ post }) {
 
   async function deleteComment() {
     try {
-      await fetch(`/api/comments/${post._id}`, { method: "DELETE" });
-      reloadData();
+      await fetch(`/api/comments/profile/${post._id}`, { method: "DELETE" });
+      location.reload();
     } catch (error) {
-      console.log(err);
+      console.log(error);
     }
   }
 
   return (
-    <div className="relative w-full _post-border rounded-lg mt-5">
+    <div
+      key={post._id}
+      className="relative w-full _post-border rounded-lg mt-5"
+    >
       {session?.data?.user?.email === post.email ? (
         <div
           onClick={deleteComment}
@@ -31,7 +34,7 @@ export default function Comment({ post }) {
       <div className="flex justify-between py-3 px-4">
         <div className="flex flex-col justify-start w-[10%] pr-4 gap-2">
           <div className="w-full rounded-full overflow-hidden">
-            <Link href={`/profile/${post.email}`}>
+            <Link href={`/profile/${post.commentmaker}`}>
               <Image
                 className="w-full mx-auto"
                 src={post.userimage}
@@ -41,6 +44,7 @@ export default function Comment({ post }) {
               ></Image>
             </Link>
           </div>
+          <p>{post.comment}</p>
         </div>
       </div>
     </div>

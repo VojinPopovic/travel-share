@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const { Schema, model, models } = mongoose;
 
-const commentSchema = new Schema(
+const commentsSchema = new Schema(
   {
     email: {
       type: String,
@@ -16,9 +16,13 @@ const commentSchema = new Schema(
       type: String,
       required: true,
     },
+    commentmaker: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
 
-const Comment = models.Comment || model("Comment", commentSchema);
-export default Comment;
+const Comments = models.Comments || model("Comments", commentsSchema);
+export default Comments;
