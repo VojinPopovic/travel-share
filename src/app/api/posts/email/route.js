@@ -15,23 +15,15 @@ export async function GET(request){
     return new NextResponse("Database Error", { status: 500 });
   }
 };
-export async function POST(request) {
-  const { email, groupname } = await request.json();
-
+export async function POST(request){
+  const body = await request.json();
+  const newPost = new Post(body);
   try {
     await connect();
-
-    await Group.findOneAndUpdate(
-      { email, groupname },
-      { email, groupname },
-      { upsert: true }
-    );
-    return new NextResponse("User has been created", {
-      status: 201,
-    });
+    await newPost.save();
+    return new NextResponse("post has been created", body, { status: 200 });
   } catch (err) {
-    return new NextResponse(err, {
-      status: 500,
-    });
+    console.log(err);
+    return new NextResponse("Database Error", { status: 500 });
   }
-}
+};

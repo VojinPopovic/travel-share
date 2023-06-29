@@ -2,7 +2,7 @@ import Comment from "@/models/Comments";
 import connect from "@/utils/db";
 import { NextResponse } from "next/server";
 
-export async function GET(request){
+export async function GET(request) {
   const url = new URL(request.url);
 
   const email = url.searchParams.get("email");
@@ -14,26 +14,19 @@ export async function GET(request){
     console.log(err);
     return new NextResponse("Database Error", { status: 500 });
   }
-};
+}
 
-export async function POST(request) {
-  const { email, comment } = await request.json();
-
+export async function POST(request){
+  const body = await request.json();
+  const newComment = new Comment(body);
   try {
     await connect();
-
-    await Comment.findOneAndUpdate(
-      { email, comment },
-      { email, comment },
-      { upsert: true }
-    );
-    return new NextResponse("User has been created", {
-      status: 201,
-    });
+    await newComment.save();
+    return new NextResponse("post has been created", body, { status: 200 });
   } catch (err) {
-    return new NextResponse(err, {
-      status: 500,
-    });
+    console.log(err);
+    return new NextResponse("Database Error", { status: 500 });
   }
-}
+};
+
 
