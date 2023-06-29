@@ -53,7 +53,7 @@ export default function Profile({ params }) {
     e.target[0].value = "";
   }
 
-  if (isUserLoading || isPostLoading) {
+  if (isUserLoading) {
     <Loading />;
   } else {
     return (
