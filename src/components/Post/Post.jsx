@@ -4,12 +4,14 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
+import CommentsModal from "../CommentsModal/CommentsModal";
 
 export default function Post({ post, reloadData }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const session = useSession();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -40,6 +42,10 @@ export default function Post({ post, reloadData }) {
     } catch (error) {
       console.log(err);
     }
+  }
+
+  function openModal() {
+    setIsModalOpen(true);
   }
 
   return (
@@ -94,8 +100,11 @@ export default function Post({ post, reloadData }) {
         </div>
       </div>
       <div className="ml-[calc(10%+13px)] mb-4">
-        <button className="_button _card-gradient">Comments</button>
+        <button onClick={openModal} className="_button _card-gradient">
+          Comments
+        </button>
       </div>
+      {isModalOpen ? <CommentsModal setIsModalOpen={setIsModalOpen} /> : ""}
     </div>
   );
 }
