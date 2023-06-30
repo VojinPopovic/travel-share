@@ -49,7 +49,7 @@ export default function Post({ post, reloadData }) {
   }
 
   return (
-    <div className="relative w-full _post-border rounded-lg mt-5">
+    <div className="relative w-full mt-5 border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-50">
       {session?.data?.user?.email === post.email ? (
         <div
           onClick={deletePost}
@@ -60,9 +60,9 @@ export default function Post({ post, reloadData }) {
       ) : (
         ""
       )}
-      <div className="flex justify-between py-3 px-4">
-        <div className="flex flex-col justify-start w-[10%] pr-4 gap-2">
-          <div className="w-full rounded-full overflow-hidden">
+      <div className="justify-between py-3 px-4 pl-[5%] sm:flex sm:pl-0 sm:justify-start">
+        <div className="flex justify-start w-full gap-2 sm:flex-col sm:w-auto sm:px-[2%]">
+          <div className="w-[60px] aspect-square rounded-full overflow-hidden">
             <Link href={`/profile/${post.email}`}>
               <Image
                 className="w-full mx-auto"
@@ -73,17 +73,17 @@ export default function Post({ post, reloadData }) {
               ></Image>
             </Link>
           </div>
-          <div className="w-full aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden">
+          <div className="w-[60px] aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden">
             <Link href={`/groups/${data[0]?.name.common.toLowerCase()}`}>
               <img
-                className="w-full h-full mx-auto rounded-lg object-cover"
+                className="w-full aspect-square mx-auto rounded-lg object-cover"
                 src={data[0]?.flags.svg}
                 alt=""
               ></img>
             </Link>
           </div>
         </div>
-        <div className="w-[90%]">
+        <div className="w-[90%] mt-3 sm:mt-0 sm:w-[70%]">
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
           {post.img !== "" ? (
@@ -99,12 +99,23 @@ export default function Post({ post, reloadData }) {
           )}
         </div>
       </div>
-      <div className="ml-[calc(10%+13px)] mb-4">
-        <button onClick={openModal} className="_button _card-gradient">
+      <div className="ml-[5%] mb-4 sm:ml-[calc(60px+4%)]">
+        <button
+          onClick={openModal}
+          className="_button _accent-color-bg text-white"
+        >
           Comments
         </button>
       </div>
-      {isModalOpen ? <CommentsModal setIsModalOpen={setIsModalOpen} id={post._id} session={session} /> : ""}
+      {isModalOpen ? (
+        <CommentsModal
+          setIsModalOpen={setIsModalOpen}
+          id={post._id}
+          session={session}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }
