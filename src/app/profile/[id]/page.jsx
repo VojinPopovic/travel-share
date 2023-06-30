@@ -42,6 +42,7 @@ export default function Profile({ params }) {
   function reloadData() {
     mutate()
   }
+  
   function reloadComments() {
     setTimeout(() => commentsMutate(), "1000");
   }

@@ -44,3 +44,8 @@
 ._post-border {
   border: 2px rgba(0, 0, 0, 0.68) solid;
 }
+
+._neumorphism {
+  background: #f2f2f2;
+  box-shadow: 7px 7px 14px #e6e6e6, -7px -7px 14px #fefefe;
+}
