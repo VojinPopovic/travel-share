@@ -19,8 +19,10 @@ export default function Comment({ post, profileEmail, reloadData, route }) {
   return (
     <div
       key={post._id}
-      className="relative w-full _post-border rounded-lg mt-5"
+      className="relative w-full border-2 border-b-4 border-gray-200 hover:bg-gray-50 rounded-lg mt-5"
     >
+    <p className="bg-sky-500 w-fit px-4 py-1 text-sm font-bold text-white rounded-tl-lg rounded-br-xl">{post.commentmaker}</p>
+
       {session?.data?.user?.email === post.commentmaker ||
       session?.data?.user?.email === profileEmail ? (
         <div
@@ -34,7 +36,7 @@ export default function Comment({ post, profileEmail, reloadData, route }) {
       )}
       <div className="flex justify-between py-3 px-4">
         <div className="flex flex-col justify-start w-full pr-4 gap-2">
-          <div className="w-[15%] max-w-[60px] rounded-full overflow-hidden">
+          <div className="w-[50px] rounded-full overflow-hidden">
             <Link href={`/profile/${post.commentmaker}`}>
               <Image
                 className="w-full mx-auto"
