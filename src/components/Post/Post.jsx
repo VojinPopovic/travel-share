@@ -104,7 +104,7 @@ export default function Post({ post, reloadData }) {
           Comments
         </button>
       </div>
-      {isModalOpen ? <CommentsModal setIsModalOpen={setIsModalOpen} /> : ""}
+      {isModalOpen ? <CommentsModal setIsModalOpen={setIsModalOpen} id={post._id} session={session} /> : ""}
     </div>
   );
 }

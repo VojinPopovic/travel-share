@@ -1,7 +1,35 @@
-export default function CommentsModal({ setIsModalOpen }) {
+"use client";
+
+import Comment from "../Comment/Comment";
+import { CreatePostComment } from "../CreatePostComment/CreatePostComment";
+import useSWR from "swr";
+
+export default function CommentsModal({ setIsModalOpen, id, session }) {
   function closeModal() {
     setIsModalOpen(false);
   }
+
+  const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  const {
+    data,
+    isLoading,
+    mutate: mutatePostComments,
+  } = useSWR(`/api/comments/post/id?id=${id}`, fetcher);
+
+  function reloadData() {
+    mutatePostComments();
+  }
+
+  async function makeComment(e) {
+    e.preventDefault();
+    const comment = e.target[0].value;
+    CreatePostComment(comment, id, session);
+    e.target.reset();
+    setTimeout(() => {
+      reloadData();
+    }, "1000");
+  }
+
   return (
     <div
       onClick={closeModal}
@@ -18,7 +46,7 @@ export default function CommentsModal({ setIsModalOpen }) {
                 Comments
               </p>
             </div>
-            <form className="divide-y divide-gray-200">
+            <form onSubmit={makeComment} className="divide-y divide-gray-200">
               <div className="flex flex-col">
                 <label className="leading-loose _text-color">
                   Post a comment
@@ -38,6 +66,19 @@ export default function CommentsModal({ setIsModalOpen }) {
                 </button>
               </div>
             </form>
+            <div>
+              {data?.slice().reverse().map((postComment) => {
+                return (
+                  <Comment
+                    key={postComment._id}
+                    post={postComment}
+                    profileEmail={postComment.commentmaker}
+                    reloadData={reloadData}
+                    route={"post"}
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
