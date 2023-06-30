@@ -21,7 +21,7 @@ export default function Comment({ post, profileEmail, reloadData, route }) {
       key={post._id}
       className="relative w-full border-2 border-b-4 border-gray-200 hover:bg-gray-50 rounded-lg mt-5"
     >
-    <p className="bg-sky-500 w-fit px-4 py-1 text-sm font-bold text-white rounded-tl-lg rounded-br-xl">{post.commentmaker}</p>
+    <p className="_accent-color-bg w-fit px-4 py-1 text-sm font-bold text-white rounded-tl-lg rounded-br-xl">{post.commentmaker}</p>
 
       {session?.data?.user?.email === post.commentmaker ||
       session?.data?.user?.email === profileEmail ? (
