@@ -10,7 +10,7 @@ export default function Comment({ post, profileEmail, reloadData, route }) {
   async function deleteComment() {
     try {
       await fetch(`/api/comments/${route}/${post._id}`, { method: "DELETE" });
-      reloadData()
+      reloadData();
     } catch (error) {
       console.log(error);
     }
@@ -33,8 +33,8 @@ export default function Comment({ post, profileEmail, reloadData, route }) {
         ""
       )}
       <div className="flex justify-between py-3 px-4">
-        <div className="flex flex-col justify-start w-[10%] pr-4 gap-2">
-          <div className="w-full rounded-full overflow-hidden">
+        <div className="flex flex-col justify-start w-full pr-4 gap-2">
+          <div className="w-[15%] max-w-[60px] rounded-full overflow-hidden">
             <Link href={`/profile/${post.commentmaker}`}>
               <Image
                 className="w-full mx-auto"
@@ -45,7 +45,7 @@ export default function Comment({ post, profileEmail, reloadData, route }) {
               ></Image>
             </Link>
           </div>
-          <p>{post.comment}</p>
+          <p className="w-full">{post.comment}</p>
         </div>
       </div>
     </div>
