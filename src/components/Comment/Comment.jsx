@@ -4,12 +4,12 @@ import Link from "next/link";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 
-export default function Comment({ post, profileEmail, reloadData }) {
+export default function Comment({ post, profileEmail, reloadData, route }) {
   const session = useSession();
 
   async function deleteComment() {
     try {
-      await fetch(`/api/comments/profile/${post._id}`, { method: "DELETE" });
+      await fetch(`/api/comments/${route}/${post._id}`, { method: "DELETE" });
       reloadData()
     } catch (error) {
       console.log(error);

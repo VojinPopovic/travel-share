@@ -11,12 +11,10 @@ import { signOut } from "next-auth/react";
 import GroupRenderer from "@/components/GroupRenderer/GroupRenderer";
 import { CreateComment } from "@/components/CreateComment/CreateComment";
 import Comment from "@/components/Comment/Comment";
-import { useRouter } from "next/navigation";
 
 export default function Profile({ params }) {
   const email = decodeURI(params.id).replaceAll("%40", "@");
   const session = useSession();
-  const router = useRouter();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
@@ -56,7 +54,7 @@ export default function Profile({ params }) {
     e.target[0].value = "";
   }
 
-  if (isUserLoading) {
+  if (isUserLoading || isPostLoading) {
     <Loading />;
   } else {
     return (
@@ -123,7 +121,7 @@ export default function Profile({ params }) {
             }}
           >
             <div className="flex flex-col">
-              <label className="leading-loose _text-color">Post a comment</label>
+              <label className="leading-loose _text-color">Post a omment</label>
               <textarea
                 type="text"
                 className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
@@ -138,13 +136,14 @@ export default function Profile({ params }) {
             </button>
           </form>
           <div className="mt-4">
-            {commentData?.map((comment) => {
+            {commentData?.slice().reverse().map((comment) => {
               return (
                 <Comment
                   key={comment._id}
                   post={comment}
                   profileEmail={email}
                   reloadData={reloadComments}
+                  route={"profile"}
                 />
               );
             })}
