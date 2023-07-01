@@ -14,10 +14,24 @@ import Link from "next/link";
 import Loading from "../loading";
 import { CreateUser } from "@/components/CreateUser/CreateUser";
 import SearchBar from "@/components/SearchBar/SearchBar";
+import Navigation from "@/components/Navigation/Navigation";
+import { useEffect, useState } from "react";
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
+  const [windowValue, setWindowValue] = useState();
+
+  //if (typeof window !== "undefined") {
+  //useEffect(() => {
+  //const updateWindowValue = () => {
+  //const windowWidth = window.innerWidth;
+  //setWindowValue(windowWidth);
+  //};
+  //updateWindowValue();
+  //console.log(windowValue)
+  //}, [window]);
+  //}
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
@@ -26,11 +40,6 @@ export default function Home() {
     mutate,
   } = useSWR("/api/posts/group", fetcher);
   const posts = postsData?.slice().reverse();
-
-  const { data: groupData, isLoading: isGroupsLoading } = useSWR(
-    `/api/groups/email?email=${session?.data?.user?.email}`,
-    fetcher
-  );
 
   function reloadData() {
     mutate();
@@ -42,20 +51,16 @@ export default function Home() {
     });
   }
 
-  if (isPostsLoading || isGroupsLoading) {
+  if (isPostsLoading) {
     return <Loading />;
-  } else if (
-    session.status === "authenticated" &&
-    !isPostsLoading &&
-    !isGroupsLoading
-  ) {
+  } else if (session.status === "authenticated" && !isPostsLoading) {
     setTimeout(() => {
       CreateUser(session);
     });
     return (
       <MainDiv>
-        <div className="relative w-full h-[393.75px]">
-          <div className="w-full mx-auto pt-4 px-[3%] flex items-center justify-between">
+        <div className="relative w-full h-[150px] md:h-[393.75px]">
+          <div className="w-full h-full mx-auto pt-4 px-[3%] flex items-center justify-between md:h-auto">
             <div className="w-[60px] aspect-square rounded-full overflow-hidden flex items-center justify-center">
               <Link href={`/profile/${session?.data?.user?.email}`}>
                 <Image
@@ -69,7 +74,7 @@ export default function Home() {
             </div>
             <SearchBar />
           </div>
-          <div className="absolute w-full h-[300px] top-0 left-0 -z-[10] border-2 border-[rgba(0,0,0,0.68)] rounded-b-xl overflow-hidden">
+          <div className="absolute w-full h-[150px] top-0 left-0 -z-[10] border-[rgba(0,0,0,0.68)] overflow-hidden md:h-[300px] md:rounded-b-xl md:border-2">
             <Image
               className="object-cover"
               src={BackgroundImage}
@@ -79,7 +84,7 @@ export default function Home() {
               alt=""
             ></Image>
           </div>
-          <div className="absolute w-full bottom-0 flex justify-between px-[3%]">
+          <div className="absolute w-full bottom-0 hidden px-[3%] md:flex md:justify-between">
             <Link href="/friends">
               <div className="w-[250px] aspect-[4/3] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
                 <div className="w-1/2 h-1/3">
@@ -132,6 +137,7 @@ export default function Home() {
             );
           })}
         </section>
+        <Navigation className="md:hidden" previousPage={"/"}/>
       </MainDiv>
     );
   }
