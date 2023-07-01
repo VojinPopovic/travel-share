@@ -92,7 +92,7 @@ export default function Post({ post, reloadData }) {
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
           {post.img !== "" ? (
-            <div className="w-full">
+            <div className="w-full mt-2">
               <Image
                 onClick={zoomImage}
                 src={post.img}

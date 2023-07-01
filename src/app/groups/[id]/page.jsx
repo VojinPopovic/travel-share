@@ -100,7 +100,7 @@ export default function Group({ params }) {
           )}
         </section>
         {renderPost === true ? (
-          <CreatePost setRenderPost={setRenderPost} group={params.id} />
+          <CreatePost setRenderPost={setRenderPost} group={params.id} reloadData={reloadData} />
         ) : (
           ""
         )}
