@@ -40,9 +40,9 @@ export default function Profile({ params }) {
   );
 
   function reloadData() {
-    mutate()
+    mutate();
   }
-  
+
   function reloadComments() {
     setTimeout(() => commentsMutate(), "1000");
   }
@@ -130,24 +130,30 @@ export default function Profile({ params }) {
               />
             </div>
             <button
-              className="_accent-color-bg justify-center items-center w-max-[200px] text-white px-4 py-3 mt-3 rounded-md focus:outline-none"
               type="submit"
+              className="relative inline-flex items-center justify-start px-12 py-2 overflow-hidden font-medium transition-all _accent-color-bg rounded-xl hover:bg-white group mt-3"
             >
-              Create
+              <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-xl"></span>
+              <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-orange-500 ">
+                Create
+              </span>
             </button>
           </form>
           <div className="mt-4">
-            {commentData?.slice().reverse().map((comment) => {
-              return (
-                <Comment
-                  key={comment._id}
-                  post={comment}
-                  profileEmail={email}
-                  reloadData={reloadComments}
-                  route={"profile"}
-                />
-              );
-            })}
+            {commentData
+              ?.slice()
+              .reverse()
+              .map((comment) => {
+                return (
+                  <Comment
+                    key={comment._id}
+                    post={comment}
+                    profileEmail={email}
+                    reloadData={reloadComments}
+                    route={"profile"}
+                  />
+                );
+              })}
           </div>
         </section>
         <Navigation previousPage="/home"></Navigation>

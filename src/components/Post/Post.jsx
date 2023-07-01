@@ -12,6 +12,7 @@ export default function Post({ post, reloadData }) {
   const [isLoading, setIsLoading] = useState(false);
   const session = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPictureOpen, setIsPictureOpen] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
@@ -48,8 +49,12 @@ export default function Post({ post, reloadData }) {
     setIsModalOpen(true);
   }
 
+  function zoomImage() {
+    setIsPictureOpen(true);
+  }
+
   return (
-    <div className="relative w-full mt-5 border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-50">
+    <div className="relative w-full mt-5 border-2 border-b-4 border-gray-200 rounded-xl hover:bg-gray-100 transition duration-300 ease-in-out">
       {session?.data?.user?.email === post.email ? (
         <div
           onClick={deletePost}
@@ -83,28 +88,34 @@ export default function Post({ post, reloadData }) {
             </Link>
           </div>
         </div>
-        <div className="w-[90%] mt-3 sm:mt-0 sm:w-[70%]">
+        <div className="w-[90%] mt-3 sm:mt-0 sm:w-[70%] z-9">
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
           {post.img !== "" ? (
-            <Image
-              src={post.img}
-              width={300}
-              height={300}
-              className="rounded-lg max-h-[300px] w-auto h-auto"
-              alt=""
-            ></Image>
+            <div className="w-full">
+              <Image
+                onClick={zoomImage}
+                src={post.img}
+                width={400}
+                height={400}
+                className="rounded-lg max-h-[300px] w-auto h-auto cursor-pointer hover:scale-105 ease-linear duration-200 transition-all"
+                alt=""
+              ></Image>
+            </div>
           ) : (
             ""
           )}
         </div>
       </div>
-      <div className="ml-[5%] mb-4 sm:ml-[calc(60px+4%)]">
+      <div className="ml-[5%] mb-4 sm:ml-[calc(60px+4%)] z-1">
         <button
           onClick={openModal}
-          className="_button _accent-color-bg text-white"
+          className="relative inline-flex items-center justify-start px-5 py-2 overflow-hidden font-medium transition-all _accent-color-bg rounded-lg hover:bg-white group"
         >
-          Comments
+          <span className="absolute inset-0 border-0 group-hover:border-[25px] ease-linear duration-100 transition-all border-white rounded-lg"></span>
+          <span className="relative w-full text-left text-white transition-colors duration-200 ease-in-out group-hover:text-orange-500 ">
+            Comments
+          </span>
         </button>
       </div>
       {isModalOpen ? (
@@ -113,6 +124,23 @@ export default function Post({ post, reloadData }) {
           id={post._id}
           session={session}
         />
+      ) : (
+        ""
+      )}
+      {isPictureOpen ? (
+        <div
+          onClick={() => setIsPictureOpen(false)}
+          className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12 z-10"
+        >
+          <Image
+            onClick={zoomImage}
+            src={post.img}
+            width={1500}
+            height={1500}
+            className="rounded-lg w-[90%] sm:w-[60%] max-w-[600px] ease-in-out duration-300 transition-all mx-auto"
+            alt=""
+          ></Image>
+        </div>
       ) : (
         ""
       )}
