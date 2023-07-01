@@ -3,6 +3,7 @@
 import Comment from "../Comment/Comment";
 import { CreatePostComment } from "../CreatePostComment/CreatePostComment";
 import useSWR from "swr";
+import PartialLoading from "../PartialLoading/PartialLoading";
 
 export default function CommentsModal({ setIsModalOpen, id, session }) {
   function closeModal() {
@@ -67,17 +68,24 @@ export default function CommentsModal({ setIsModalOpen, id, session }) {
               </div>
             </form>
             <div>
-              {data?.slice().reverse().map((postComment) => {
-                return (
-                  <Comment
-                    key={postComment._id}
-                    post={postComment}
-                    profileEmail={postComment.commentmaker}
-                    reloadData={reloadData}
-                    route={"post"}
-                  />
-                );
-              })}
+              {isLoading ? (
+                <PartialLoading />
+              ) : (
+                data
+                  ?.slice()
+                  .reverse()
+                  .map((postComment) => {
+                    return (
+                      <Comment
+                        key={postComment._id}
+                        post={postComment}
+                        profileEmail={postComment.commentmaker}
+                        reloadData={reloadData}
+                        route={"post"}
+                      />
+                    );
+                  })
+              )}
             </div>
           </div>
         </div>

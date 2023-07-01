@@ -57,20 +57,14 @@ export default function Home() {
                   your favorite destinations to visit
                 </p>
               </div>
-              <div className="flex gap-[10%]">
-                <button
-                  onClick={() => signIn("google")}
-                  className="_button min-w-[100px] _accent-color-bg text-white"
-                >
-                  Sign up!
-                </button>
-                <button
-                  onClick={() => signIn("google")}
-                  className="_button min-w-[100px] _second-accent-color-bg _text-color"
-                >
-                  Log in
-                </button>
-              </div>
+              <button
+                onClick={() => signIn("google")}
+                className="relative px-6 py-3 font-medium text-white rounded-lg group"
+              >
+                <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-1 -translate-y-1 bg-[#FF7043] ease opacity-50 group-hover:translate-x-0 group-hover:translate-y-0 rounded-lg"></span>
+                <span className="absolute inset-0 w-full h-full transition duration-300 transform translate-x-1 translate-y-1 bg-[#FF3E00] ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0 mix-blend-screen rounded-lg"></span>
+                <span className="relative">Sign In!</span>
+              </button>
             </div>
             <div className="absolute right-0 w-[70%] h-full -z-[2]">
               <Image
