@@ -130,7 +130,7 @@ export default function Home() {
           </div>
         </div>
         <section className="w-full px-[3%] pb-4">
-          <p className="_text-color text-3xl font-semibold mt-5">Featured</p>
+          <p className="_text-color text-3xl font-semibold mt-5">Home</p>
           {posts?.map((post) => {
             return (
               <Post post={post} reloadData={reloadData} key={post._id}></Post>

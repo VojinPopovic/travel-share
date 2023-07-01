@@ -1,6 +1,6 @@
 import { useSession } from "next-auth/react";
 
-export default function CreatePost({ setRenderPost, group }) {
+export default function CreatePost({ setRenderPost, group, reloadData }) {
   const session = useSession();
 
   function closeModal() {
@@ -25,6 +25,7 @@ export default function CreatePost({ setRenderPost, group }) {
         }),
       });
       e.target.reset();
+      reloadData()
     } catch (err) {
       console.log(err);
     }
