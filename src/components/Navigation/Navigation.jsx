@@ -9,11 +9,12 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProfileIcon from "../../../public/profileIcon.svg";
 
-export default function Navigation({ previousPage }) {
+export default function Navigation({ previousPage, className }) {
   const session = useSession();
+  let classname = className 
 
   return (
-    <div className="w-full h-[50px] _card-gradient fixed top-0 left-0 mt-[calc(100vh-50px)] flex justify-center">
+    <div className={`w-full h-[50px] _card-gradient fixed top-0 left-0 mt-[calc(100vh-50px)] flex justify-center ${classname}`}>
       <div className="w-full h-full max-w-[900px] flex justify-around items-center">
         <div className="w-10% h-full flex items-center justify-center cursor-pointer">
           <Link href={previousPage}>

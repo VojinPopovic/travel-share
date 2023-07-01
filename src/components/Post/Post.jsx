@@ -130,14 +130,14 @@ export default function Post({ post, reloadData }) {
       {isPictureOpen ? (
         <div
           onClick={() => setIsPictureOpen(false)}
-          className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12 z-10"
+          className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex justify-center items-center z-10"
         >
           <Image
             onClick={zoomImage}
             src={post.img}
             width={1500}
             height={1500}
-            className="rounded-lg w-[90%] sm:w-[60%] max-w-[600px] ease-in-out duration-300 transition-all mx-auto"
+            className="rounded-lg w-[90%] sm:w-[60%] max-w-[600px] ease-in-out duration-300 transition-all"
             alt=""
           ></Image>
         </div>
