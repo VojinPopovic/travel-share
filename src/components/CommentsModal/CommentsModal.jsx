@@ -38,7 +38,7 @@ export default function CommentsModal({ setIsModalOpen, id, session }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-full py-3 sm:max-w-xl sm:mx-auto overscroll-contain"
+        className="relative w-[98%] py-3 max-w-[600px] mx-auto overscroll-contain"
       >
         <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">
