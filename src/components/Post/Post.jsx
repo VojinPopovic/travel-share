@@ -19,9 +19,6 @@ export default function Post({ post, reloadData }) {
       setIsLoading(true);
       const res = await fetch(
         `https://restcountries.com/v3.1/name/${post.group}`,
-        {
-          cache: "no-store",
-        }
       );
 
       if (!res.ok) {
