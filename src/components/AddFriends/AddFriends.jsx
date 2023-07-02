@@ -79,7 +79,7 @@ export default function AddFriends({ setIsFriendsOpen }) {
                 <div className="py-8 text-base leading-6 space-y-4 _text-color sm:text-lg sm:leading-7">
                   <div className="flex flex-col">
                     <label className="leading-loose">
-                      Input user's email adress
+                      Input user&apos;s email adress
                     </label>
                     <input
                       type="text"
