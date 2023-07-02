@@ -37,7 +37,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative py-3 sm:max-w-xl sm:mx-auto"
+        className="relative w-[98%] py-3 max-w-[600px] mx-auto"
       >
         <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">

@@ -85,7 +85,7 @@ export default function Home() {
             ></Image>
           </div>
           <div className="absolute w-full bottom-0 hidden px-[3%] md:flex md:justify-between">
-            <Link href="/friends">
+            <Link href={`/friends/${session?.data.user.email}`}>
               <div className="w-[250px] aspect-[4/3] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
                 <div className="w-1/2 h-1/3">
                   <Image
@@ -137,7 +137,7 @@ export default function Home() {
             );
           })}
         </section>
-        <Navigation className="md:hidden" previousPage={"/"}/>
+        <Navigation className="md:hidden" previousPage={"/"} />
       </MainDiv>
     );
   }

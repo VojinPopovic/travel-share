@@ -28,7 +28,7 @@ export default function Navigation({ previousPage, className }) {
           </Link>
         </div>
         <div className="w-10% h-full flex items-center justify-center">
-          <Link href="/">
+          <Link href={`/friends/${session?.data?.user?.email}`}>
             <Image
               className="w-auto h-auto max-h-[30px]"
               src={FriendsIcon}
