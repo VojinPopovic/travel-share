@@ -10,7 +10,7 @@ export async function POST(request) {
     await connect();
 
     await Friend.findOneAndUpdate(
-      { email, addeduser, accepted },
+      { email, addeduser },
       { email, addeduser, username, userimage, accepted },
       { upsert: true }
     );
@@ -25,12 +25,10 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
-  const url = new URL(request.url);
 
-  const addeduser = url.searchParams.get("addeduser");
   try {
     await connect();
-    const groups = await Friend.find(addeduser && { addeduser });
+    const groups = await Friend.find();
     return new NextResponse(JSON.stringify(groups), { status: 200 });
   } catch (err) {
     console.log(err);

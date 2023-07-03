@@ -21,10 +21,19 @@ export default function Friends({ params }) {
     data: friendsData,
     isLoading: isPostLoading,
     mutate,
-  } = useSWR(`/api/friends?addeduser=${email}`, fetcher);
+  } = useSWR(`/api/friends`, fetcher);
   const friends = friendsData?.slice().reverse();
-  const newRequests = friends?.filter((friend) => friend.accepted === false);
-  const userFriends = friends?.filter((friend) => friend.accepted === true);
+  const newRequests = friends?.filter(
+    (friend) =>
+      friend.accepted === false &&
+      friend.addeduser === session?.data?.user?.email
+  );
+  const userFriends = friends?.filter(
+    (friend) =>
+      friend.accepted === true &&
+      (session?.data?.user?.email === friend.email ||
+        session?.data?.user?.email === friend.addeduser)
+  );
 
   const { data: userData, isLoading: isUserLoading } = useSWR(
     `/api/users?email=${email}`,
@@ -79,7 +88,9 @@ export default function Friends({ params }) {
               <p>Doesn&apos;t have any friends</p>
             ) : (
               userFriends?.map((post) => {
-                return <FriendsCard key={post._id} item={post} />;
+                return (
+                  <FriendsCard key={post._id} item={post} session={session} />
+                );
               })
             )}
           </div>
