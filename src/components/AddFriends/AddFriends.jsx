@@ -10,8 +10,7 @@ export default function AddFriends({ setIsFriendsOpen }) {
   }
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const { data: usersData, isLoading } = useSWR(`/api/users`, fetcher);
-  const { data: friendsData } = useSWR(`/api/friends`, fetcher);
-  console.log(friendsData);
+  const { data: friendsData, mutate } = useSWR(`/api/friends`, fetcher);
 
   async function addUser(addedUserEmail) {
     try {
@@ -32,46 +31,42 @@ export default function AddFriends({ setIsFriendsOpen }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    if (isLoading) {
-      alert("users still loading");
-    } else {
-      let addedUserEmail = e.target[0].value;
+    let addedUserEmail = e.target[0].value;
 
-      let addedUser = usersData?.filter(
-        (item) => item.email === addedUserEmail
-      );
+    let friendsOneStepOne = friendsData?.filter(
+      (item) => item.addeduser === addedUserEmail
+    );
+    let friendsOneStepTwo = friendsOneStepOne.filter(
+      (item) => item.email === session?.data?.user?.email
+    );
 
-      if (addedUser.length < 1) {
-        alert("user not found");
+    let friendsTwoStepOne = friendsData?.filter(
+      (item) => item.email === addedUserEmail
+    );
+    let friendsTwoStepTwo = friendsTwoStepOne.filter(
+      (item) => item.addeduser === session?.data?.user?.email
+    );
+    let filterUser = usersData?.filter((item) => item.email === addedUserEmail);
+
+    if (filterUser.length > 0) {
+      if (friendsData.length < 1) {
+        addUser(addedUserEmail);
       } else {
-        if (addedUserEmail !== session?.data?.user?.email) {
-          if (friendsData?.length < 1) {
-            addUser(addedUserEmail);
-          } else {
-            friendsData?.forEach((item) => {
-              if (
-                addedUserEmail !== item.email &&
-                session?.data?.user?.email !== item.addeduser
-              ) {
-                if (
-                  addedUserEmail !== item.addeduser &&
-                  session?.data?.user?.email !== item.email
-                ) {
-                  addUser(addedUserEmail);
-                } else {
-                  alert("You are already friends with that user");
-                }
-              } else {
-                alert("You are already friends with that user");
-              }
-            });
-            e.target.reset();
-          }
-          e.target.reset();
+        if (addedUserEmail === session?.data?.user?.email) {
+          alert("Can't add yourself!");
         } else {
-          alert("You can't add yourself!");
+          if (friendsOneStepTwo < 1 && friendsTwoStepTwo < 1) {
+            addUser(addedUserEmail);
+            alert("User added");
+            e.target.reset()
+          } else {
+            alert("You are already friends with that user, or have a request pending");
+          }
         }
       }
+      mutate();
+    } else {
+      alert("user not found");
     }
   }
 
