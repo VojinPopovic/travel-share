@@ -9,7 +9,9 @@ export default function AddFriends({ setIsFriendsOpen }) {
     setIsFriendsOpen(false);
   }
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
-  const { data, isLoading } = useSWR(`/api/users`, fetcher);
+  const { data: usersData, isLoading } = useSWR(`/api/users`, fetcher);
+  const { data: friendsData } = useSWR(`/api/friends`, fetcher);
+  console.log(friendsData);
 
   async function addUser(addedUserEmail) {
     try {
@@ -35,12 +37,36 @@ export default function AddFriends({ setIsFriendsOpen }) {
     } else {
       let addedUserEmail = e.target[0].value;
 
-      let addedUser = data?.filter((item) => item.email === addedUserEmail);
+      let addedUser = usersData?.filter(
+        (item) => item.email === addedUserEmail
+      );
+
       if (addedUser.length < 1) {
         alert("user not found");
       } else {
         if (addedUserEmail !== session?.data?.user?.email) {
-          addUser(addedUserEmail);
+          if (friendsData?.length < 1) {
+            addUser(addedUserEmail);
+          } else {
+            friendsData?.forEach((item) => {
+              if (
+                addedUserEmail !== item.email &&
+                session?.data?.user?.email !== item.addeduser
+              ) {
+                if (
+                  addedUserEmail !== item.addeduser &&
+                  session?.data?.user?.email !== item.email
+                ) {
+                  addUser(addedUserEmail);
+                } else {
+                  alert("You are already friends with that user");
+                }
+              } else {
+                alert("You are already friends with that user");
+              }
+            });
+            e.target.reset();
+          }
           e.target.reset();
         } else {
           alert("You can't add yourself!");
@@ -66,9 +92,9 @@ export default function AddFriends({ setIsFriendsOpen }) {
                   i
                 </div>
                 <div className="block pl-2 font-semibold text-xl self-start _text-color">
-                  <h2 className="leading-relaxed">Create a Post</h2>
+                  <h2 className="leading-relaxed">Add a friend</h2>
                   <p className="text-sm text-gray-500 font-normal leading-relaxed">
-                    Say something interesting about the place you visited!
+                    Search for a friend by their email adress
                   </p>
                 </div>
               </div>
@@ -78,13 +104,11 @@ export default function AddFriends({ setIsFriendsOpen }) {
               >
                 <div className="py-8 text-base leading-6 space-y-4 _text-color sm:text-lg sm:leading-7">
                   <div className="flex flex-col">
-                    <label className="leading-loose">
-                      Input user&apos;s email adress
-                    </label>
+                    <label className="leading-loose">Email</label>
                     <input
                       type="text"
                       className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                      placeholder="Email"
+                      placeholder="johnjohnson@gmail.com"
                     />
                   </div>
                 </div>
