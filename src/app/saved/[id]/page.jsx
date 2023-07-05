@@ -36,17 +36,12 @@ export default async function Saved({ params }) {
   });
   savedPosts.forEach((item) => item);
   let content = savedPosts.map((item) => {
-    return <Post post={item[0]} />;
+    return <Post key={item[0]._id} post={item[0]} />;
   });
 
   return (
     <MainDiv>
-      <div>
-        {data.map((item) => {
-          return item.email;
-        })}
-        {content}
-      </div>
+      <div>{content}</div>
     </MainDiv>
   );
 }
