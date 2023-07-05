@@ -20,18 +20,6 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const session = useSession();
   const router = useRouter();
-  const [windowValue, setWindowValue] = useState();
-
-  //if (typeof window !== "undefined") {
-  //useEffect(() => {
-  //const updateWindowValue = () => {
-  //const windowWidth = window.innerWidth;
-  //setWindowValue(windowWidth);
-  //};
-  //updateWindowValue();
-  //console.log(windowValue)
-  //}, [window]);
-  //}
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
