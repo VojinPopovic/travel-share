@@ -113,7 +113,7 @@ export default function Post({ post, reloadData }) {
           )}
         </div>
       </div>
-      <div className="ml-[5%] mb-4 sm:ml-[calc(60px+4%)] z-1 flex w-full gap-2">
+      <div className="ml-[5%] mb-4 sm:ml-[calc(60px+4%)] z-1 flex w-[90%] gap-2">
         <button
           onClick={openModal}
           className="relative inline-flex items-center justify-start px-5 py-2 overflow-hidden font-medium transition-all _accent-color-bg rounded-lg hover:bg-white group"

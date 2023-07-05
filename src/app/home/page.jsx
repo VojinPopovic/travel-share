@@ -101,7 +101,7 @@ export default function Home() {
                 <p className="text-[30px] font-semibold _text-color">Groups</p>
               </div>
             </Link>
-            <Link href="/saved">
+            <Link href={`/saved/${session?.data.user.email}`}>
               <div className="w-[250px]  aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
                 <div className="w-1/2 h-1/3">
                   <Image
