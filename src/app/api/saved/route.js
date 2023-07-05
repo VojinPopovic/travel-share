@@ -24,9 +24,12 @@ export async function POST(request) {
 }
 
 export async function GET(request) {
+  const url = new URL(request.url);
+
+  const email = url.searchParams.get("email");
   try {
     await connect();
-    const saveds = await Saved.find();
+    const saveds = await Saved.find(email && { email });
     return new NextResponse(JSON.stringify(saveds), { status: 200 });
   } catch (error) {
     return new NextResponse("error", { status: 500 });
