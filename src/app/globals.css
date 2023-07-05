@@ -18,10 +18,10 @@
 }
 
 ._accent-color-bg {
-  background-color: rgba(207, 50, 0, 0.76);
+  background-color: rgb(234 88 12);
 }
 ._accent-color {
-  color: rgba(207, 50, 0, 0.76);
+  color: rgb(234 88 12);
 }
 
 ._second-accent-color-bg {
@@ -48,4 +48,8 @@
 ._neumorphism {
   background: #f2f2f2;
   box-shadow: 7px 7px 14px #e6e6e6, -7px -7px 14px #fefefe;
+}
+
+._button-accent-border {
+  border: 2px rgba(207, 50, 0, 0.76) solid;
 }
