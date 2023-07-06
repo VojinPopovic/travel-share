@@ -71,7 +71,7 @@ export default function Post({ post, reloadData }) {
       ) : (
         ""
       )}
-      <div className="justify-between py-3 px-4 pl-[5%] sm:flex sm:pl-0 sm:justify-start">
+      <div className="justify-between py-3 px-4 sm:flex sm:pl-0 sm:px-6 sm:justify-start">
         <div className="flex justify-start w-full gap-2 sm:flex-col sm:w-auto sm:px-[2%]">
           <div className="w-[60px] aspect-square rounded-full overflow-hidden">
             <Link href={`/profile/${post.email}`}>
@@ -94,7 +94,7 @@ export default function Post({ post, reloadData }) {
             </Link>
           </div>
         </div>
-        <div className="w-[90%] mt-3 sm:mt-0 sm:w-[70%] z-9">
+        <div className="mt-3 sm:mt-0 z-9 sm:w-[90%]">
           <p className="text-xl font-semibold _text-color">{post.title}</p>
           <p className="_text-color font-medium">{post.content}</p>
           {post.img !== "" ? (

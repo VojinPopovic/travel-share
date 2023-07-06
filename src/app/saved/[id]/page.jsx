@@ -1,5 +1,6 @@
-import Post from "@/components/Post/Post";
 import MainDiv from "@/components/MainDiv/MainDiv";
+import SavedPosts from "@/components/SavedPosts/SavedPosts";
+import Navigation from "@/components/Navigation/Navigation";
 
 async function getSaved(email) {
   try {
@@ -25,23 +26,15 @@ async function getPosts() {
 
 export default async function Saved({ params }) {
   const email = decodeURI(params.id).replaceAll("%40", "@");
-  console.log(email);
   const data = await getSaved(email);
   const posts = await getPosts();
 
-  let savedPosts = [];
-
-  data.forEach((item) => {
-    savedPosts.push(posts.filter((post) => item.postid === post._id));
-  });
-  savedPosts.forEach((item) => item);
-  let content = savedPosts.map((item) => {
-    return <Post key={item[0]._id} post={item[0]} />;
-  });
-
   return (
     <MainDiv>
-      <div>{content}</div>
+      <div>
+        <SavedPosts data={data} posts={posts} email={email} />
+      </div>
+      <Navigation previousPage={"/home"} />
     </MainDiv>
   );
 }
