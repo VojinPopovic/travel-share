@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 import CommentsModal from "../CommentsModal/CommentsModal";
 import { CreateSavedPost } from "../CreateSavedPost/CreateSavedPost";
 
-export default function Post({ post, reloadData }) {
+export default function Post({ post, reloadData, saved }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -44,10 +44,18 @@ export default function Post({ post, reloadData }) {
   }
 
   async function savePost() {
-    try {
-      CreateSavedPost(session, post._id);
-    } catch (error) {
-      console.log(error);
+    if (saved) {
+      try {
+        await fetch(`/api/saved/${post.savedid}`, { method: "DELETE" });
+      } catch (error) {
+        console.log(err);
+      }
+    } else {
+      try {
+        CreateSavedPost(session, post._id);
+      } catch (error) {
+        console.log(error);
+      }
     }
   }
 
@@ -125,13 +133,21 @@ export default function Post({ post, reloadData }) {
         </button>
         <div
           onClick={savePost}
-          className="flex justify-center group items-center text-red-700 hover:text-white color-transition duration-300 hover:bg-orange-600 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-orange-600 dark:text-orange-600 dark:hover:text-white dark:hover:bg-orange-600 cursor-pointer"
+          className={`${
+            saved === true
+              ? "bg-orange-600 text-white"
+              : "bg-white hover:bg-orange-600 hover:text-white"
+          } flex justify-center group items-center color-transition duration-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-orange-600 dark:text-orange-600 dark:hover:text-white dark:hover:bg-orange-600 cursor-pointer`}
         >
           <svg
             width="35"
             height="22"
             viewBox="0 0 120 98"
-            className="fill-orange-600 group-hover:fill-white"
+            className={`${
+              saved === true
+                ? "fill-white"
+                : "fill-orange-600 group-hover:fill-white"
+            } `}
             strokeWidth="1px"
             xmlns="http://www.w3.org/2000/svg"
           >
