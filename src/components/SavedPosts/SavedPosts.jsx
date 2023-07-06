@@ -4,10 +4,14 @@ import Post from "../Post/Post";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function SavedPosts({ data, posts, email }) {
   const session = useSession();
   const router = useRouter();
+  useEffect(() => {
+    router.refresh;
+  });
 
   let savedPosts = [];
 
