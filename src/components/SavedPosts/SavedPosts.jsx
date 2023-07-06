@@ -10,13 +10,19 @@ export default function SavedPosts({ data, posts, email }) {
   const router = useRouter();
 
   let savedPosts = [];
+  let savedIds = [];
 
   data.forEach((item) => {
-    savedPosts.push(posts.filter((post) => item.postid === post._id));
+    posts.forEach((post) => {
+      if (item.postid === post._id) {
+        post.savedid = item._id;
+        savedPosts.push(post);
+      }
+    });
   });
   savedPosts.forEach((item) => item);
   let content = savedPosts.map((item) => {
-    return <Post key={item[0]._id} post={item[0]} />;
+    return <Post key={item._id} post={item} saved={true} />;
   });
 
   if (session?.data?.user?.email !== email) {
@@ -45,7 +51,7 @@ export default function SavedPosts({ data, posts, email }) {
             </div>
             <p className="text-md _text-color font-semibold whitespace-nowrap text-2xl">
               {session.status === "authenticated"
-                ? session?.data?.user?.name
+                ? session?.data?.user?.name + "'s saved posts"
                 : ""}
             </p>
           </div>

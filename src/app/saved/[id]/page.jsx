@@ -16,7 +16,8 @@ async function getSaved(email) {
 async function getPosts() {
   try {
     const posts = await fetch(
-      `https://travel-share.vercel.app/api/posts/email`
+      `https://travel-share.vercel.app/api/posts/email`,
+      { cache: "no-store" }
     );
     return posts.json();
   } catch (error) {
