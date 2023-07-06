@@ -11,7 +11,6 @@ export default function SavedPosts({ data, posts, email }) {
   const router = useRouter();
   useEffect(() => {
     router.refresh;
-    console.log("cao")
   });
 
   let savedPosts = [];
