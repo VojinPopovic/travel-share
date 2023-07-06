@@ -10,7 +10,6 @@ export default function SavedPosts({ data, posts, email }) {
   const router = useRouter();
 
   let savedPosts = [];
-  let savedIds = [];
 
   data.forEach((item) => {
     posts.forEach((post) => {
