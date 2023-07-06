@@ -15,7 +15,6 @@ import Loading from "../loading";
 import { CreateUser } from "@/components/CreateUser/CreateUser";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Navigation from "@/components/Navigation/Navigation";
-import { useEffect, useState } from "react";
 
 export default function Home() {
   const session = useSession();
@@ -117,7 +116,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <section className="w-full px-[3%] pb-4">
+        <section className="w-full px-[3%] pb-20">
           <p className="_text-color text-3xl font-semibold mt-5">Home</p>
           {posts?.map((post) => {
             return (
