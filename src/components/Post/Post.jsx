@@ -6,12 +6,14 @@ import Image from "next/image";
 import { useSession } from "next-auth/react";
 import CommentsModal from "../CommentsModal/CommentsModal";
 import { CreateSavedPost } from "../CreateSavedPost/CreateSavedPost";
+import { useRouter } from "next/navigation";
 
 export default function Post({ post, reloadData, saved }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const session = useSession();
+  const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPictureOpen, setIsPictureOpen] = useState(false);
 
@@ -47,6 +49,7 @@ export default function Post({ post, reloadData, saved }) {
     if (saved) {
       try {
         await fetch(`/api/saved/${post.savedid}`, { method: "DELETE" });
+        router.refresh()
       } catch (error) {
         console.log(err);
       }
