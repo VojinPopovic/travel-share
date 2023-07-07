@@ -8,9 +8,11 @@ import BackArrowIcon from "../../../public/backArrowIcon.svg";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import ProfileIcon from "../../../public/profileIcon.svg";
+import { useRouter } from "next/navigation";
 
 export default function Navigation({ previousPage, className }) {
   const session = useSession();
+  const router = useRouter()
   let classname = className;
 
   return (
@@ -18,7 +20,7 @@ export default function Navigation({ previousPage, className }) {
       className={`w-full h-[50px] _card-gradient fixed top-0 left-0 mt-[calc(100vh-50px)] flex justify-center ${classname}`}
     >
       <div className="w-full h-full max-w-[900px] flex justify-around items-center">
-        <div className="w-10% h-full flex items-center justify-center cursor-pointer">
+        <div className="h-full flex items-center justify-center cursor-pointer">
           <Link href={previousPage}>
             <Image
               className="w-auto h-auto max-h-[30px]"
@@ -29,7 +31,7 @@ export default function Navigation({ previousPage, className }) {
             ></Image>
           </Link>
         </div>
-        <div className="w-10% h-full flex items-center justify-center">
+        <div className="h-full flex items-center justify-center">
           <Link href={`/friends/${session?.data?.user?.email}`}>
             <Image
               className="w-auto h-auto max-h-[30px]"
@@ -40,7 +42,7 @@ export default function Navigation({ previousPage, className }) {
             ></Image>
           </Link>
         </div>
-        <div className="w-10% h-full flex items-center justify-center">
+        <div className="h-full flex items-center justify-center">
           <Link href="/groups">
             <Image
               className="w-auto h-auto max-h-[30px]"
@@ -51,7 +53,7 @@ export default function Navigation({ previousPage, className }) {
             ></Image>
           </Link>
         </div>
-        <div className="w-10% h-full flex items-center justify-center">
+        <div className="h-full flex items-center justify-center">
           <Link href={`/saved/${session?.data?.user?.email}`}>
             <Image
               className="w-auto h-auto max-h-[30px]"

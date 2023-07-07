@@ -4,14 +4,15 @@ import Post from "../Post/Post";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function SavedPosts({ data, posts, email }) {
   const session = useSession();
   const router = useRouter();
+
   useEffect(() => {
-    router.refresh;
-  });
+    router.refresh();
+  }, []);
 
   let savedPosts = [];
 
@@ -23,6 +24,7 @@ export default function SavedPosts({ data, posts, email }) {
       }
     });
   });
+
   savedPosts.forEach((item) => item);
   let content = savedPosts.map((item) => {
     return <Post key={item._id} post={item} saved={true} />;
@@ -33,7 +35,6 @@ export default function SavedPosts({ data, posts, email }) {
       router.push(`/saved/${session?.data?.user?.email}`);
     });
   }
-
   return (
     <>
       <div className="relative w-full h-[200px] border-b-2 border-[rgba(0,0,0,0.68)]">
@@ -64,7 +65,7 @@ export default function SavedPosts({ data, posts, email }) {
         <p className=" _text-color font-semibold whitespace-nowrap text-2xl mt-5">
           Saved Posts
         </p>
-        {content}
+        {content.length === 0 ? <p>No saved posts</p> : content}
       </div>
     </>
   );
