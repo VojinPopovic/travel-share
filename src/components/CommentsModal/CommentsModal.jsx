@@ -55,7 +55,7 @@ export default function CommentsModal({ setIsModalOpen, id, session }) {
                 <textarea
                   type="text"
                   className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                  placeholder="Title"
+                  placeholder="Write something..."
                 />
               </div>
               <div className="flex items-center space-x-4">
