@@ -58,7 +58,7 @@ export default function Home() {
               </div>
               <button
                 onClick={() => signIn("google")}
-                className="relative px-6 py-3 font-medium text-white rounded-lg group"
+                className="relative ml-1 px-6 py-3 font-medium text-white rounded-lg group"
               >
                 <span className="absolute inset-0 w-full h-full transition duration-300 transform -translate-x-1 -translate-y-1 bg-[#FF7043] ease opacity-50 group-hover:translate-x-0 group-hover:translate-y-0 rounded-lg"></span>
                 <span className="absolute inset-0 w-full h-full transition duration-300 transform translate-x-1 translate-y-1 bg-[#FF3E00] ease opacity-80 group-hover:translate-x-0 group-hover:translate-y-0 mix-blend-screen rounded-lg"></span>
