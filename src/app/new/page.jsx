@@ -4,7 +4,7 @@ import Post from "@/components/Post/Post";
 
 async function getPosts() {
   try {
-    const data = await fetch("http://localhost:3000/api/posts/group");
+    const data = await fetch("https://travel-share.vercel.app/api/posts/group");
     return data.json();
   } catch (error) {
     console.log(error);
