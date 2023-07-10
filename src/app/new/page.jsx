@@ -4,7 +4,10 @@ import Post from "@/components/Post/Post";
 
 async function getPosts() {
   try {
-    const data = await fetch("https://travel-share.vercel.app/api/posts/group");
+    const data = await fetch(
+      `https://travel-share.vercel.app/api/posts/email`,
+      { cache: "no-cache" }
+    );
     return data.json();
   } catch (error) {
     console.log(error);
