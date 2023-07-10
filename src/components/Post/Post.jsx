@@ -8,7 +8,7 @@ import CommentsModal from "../CommentsModal/CommentsModal";
 import { CreateSavedPost } from "../CreateSavedPost/CreateSavedPost";
 import { useRouter } from "next/navigation";
 
-export default function Post({ post, reloadData, saved}) {
+export default function Post({ post, reloadData, saved }) {
   const [data, setData] = useState([]);
   const [err, setErr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -64,6 +64,7 @@ export default function Post({ post, reloadData, saved}) {
 
   function openModal() {
     setIsModalOpen(true);
+    document.body.style.overflowY = "hidden";
   }
 
   function zoomImage() {
@@ -140,7 +141,7 @@ export default function Post({ post, reloadData, saved}) {
             className={`${
               saved === true
                 ? "bg-orange-600 text-white"
-                : "bg-white hover:bg-orange-600 hover:text-white"
+                : "hover:bg-orange-600 hover:text-white"
             } flex justify-center group items-center color-transition duration-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:border-orange-600 dark:text-orange-600 dark:hover:text-white dark:hover:bg-orange-600 cursor-pointer`}
           >
             <svg
