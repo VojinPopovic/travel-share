@@ -27,3 +27,4 @@ export async function POST(request){
     return new NextResponse("Database Error", { status: 500 });
   }
 };
+
