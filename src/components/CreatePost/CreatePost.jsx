@@ -25,7 +25,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
         }),
       });
       e.target.reset();
-      reloadData()
+      reloadData();
     } catch (err) {
       console.log(err);
     }
@@ -78,6 +78,10 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                     placeholder="Image link"
                   />
                 </div>
+                <p>Or</p>
+                <button className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
+                  Upload image
+                </button>
               </div>
               <div className="pt-4 flex items-center space-x-4">
                 <button

@@ -34,7 +34,7 @@ export default function Feedback() {
                         Name
                       </label>
                       <input
-                        className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                        className="w-full rounded-lg p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Name"
                         type="text"
                         id="name"
@@ -46,7 +46,7 @@ export default function Feedback() {
                           Email
                         </label>
                         <input
-                          className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                          className="w-full rounded-lg p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Email address"
                           type="email"
                           id="email"
@@ -57,7 +57,7 @@ export default function Feedback() {
                           Phone
                         </label>
                         <input
-                          className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                          className="w-full rounded-lg p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Phone Number"
                           type="tel"
                           id="phone"
@@ -69,7 +69,7 @@ export default function Feedback() {
                         Message
                       </label>
                       <textarea
-                        className="w-full rounded-lg border-gray-200 p-3 text-sm md:h-[150px]"
+                        className="w-full rounded-lg p-3 text-sm md:h-[150px] border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Message"
                         rows="3"
                         id="message"
