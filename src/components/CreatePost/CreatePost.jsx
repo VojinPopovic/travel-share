@@ -25,7 +25,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
         }),
       });
       e.target.reset();
-      reloadData()
+      reloadData();
     } catch (err) {
       console.log(err);
     }
@@ -66,7 +66,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                   <label className="leading-loose">Post Content</label>
                   <textarea
                     type="text"
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    className="min-h-[100px] px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     placeholder="Message"
                   />
                 </div>
@@ -78,6 +78,10 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                     placeholder="Image link"
                   />
                 </div>
+                <p>Or</p>
+                <button className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
+                  Upload image
+                </button>
               </div>
               <div className="pt-4 flex items-center space-x-4">
                 <button
