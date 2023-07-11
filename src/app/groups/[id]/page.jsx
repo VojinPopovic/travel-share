@@ -52,7 +52,7 @@ export default function Group({ params }) {
     return (
       <MainDiv>
         <div className="relative w-full h-[200px] border-b-2 border-[rgba(0,0,0,0.68)]">
-          <div className="absolute bottom-0 left-0 w-full flex justify-start items-center mb-4 ml-4">
+          <div className="absolute bottom-0 left-0 w-full flex justify-start items-center mb-4">
             <div className="h-[80px] aspect-square rounded-full border-2 border-[rgba(0,0,0,0.68)] overflow-hidden mr-2">
               <Image
                 className="w-full h-full mx-auto rounded-lg object-cover"
@@ -67,7 +67,7 @@ export default function Group({ params }) {
             </p>
           </div>
         </div>
-        <section className="w-full px-[3%] pb-4">
+        <section className="w-full px-[3%] pb-20">
           <div className="mt-5 flex gap-2">
             <p className="_text-color text-2xl font-semibold">Group posts</p>
             <button className="_button _card-gradient" onClick={openModal}>

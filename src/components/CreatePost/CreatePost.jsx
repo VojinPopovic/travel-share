@@ -66,7 +66,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                   <label className="leading-loose">Post Content</label>
                   <textarea
                     type="text"
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                    className="min-h-[100px] px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                     placeholder="Message"
                   />
                 </div>
