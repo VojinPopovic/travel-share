@@ -34,16 +34,16 @@ export default function CommentsModal({ setIsModalOpen, id, session }) {
   return (
     <div
       onClick={closeModal}
-      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12 z-10 overflow-y-scroll"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10 overflow-y-scroll"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-[98%] py-3 max-w-[600px] mx-auto"
+        className="relative w-full sm:max-w-[600px] mx-auto"
       >
-        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10 max-h-[500px] overflow-y-auto">
-          <div className="max-w-md mx-auto">
-            <div className="mt-5 flex">
-              <p className="_text-color text-2xl font-semibold mb-4">
+        <div className="relative px-2 sm:px-4 py-2 sm:py-4 sm:py-8 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10 max-h-[100vh] overflow-y-auto">
+          <div className="mx-auto sm:px-5">
+            <div className="mt-2 sm:mt-5 flex">
+              <p className="_text-color text-2xl font-semibold mb-2 sm:mb-4">
                 Comments
               </p>
             </div>

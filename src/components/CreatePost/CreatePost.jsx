@@ -33,11 +33,11 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
   return (
     <div
       onClick={closeModal}
-      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12 z-10"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-[98%] py-3 max-w-[600px] mx-auto"
+        className="relative w-[98%] py-3 max-w-[600px] mx-auto max-h-[100vh] overflow-auto"
       >
         <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
           <div className="max-w-md mx-auto">
@@ -78,7 +78,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                     placeholder="Image link"
                   />
                 </div>
-                <p>Or</p>
+                <p className="opacity-70">Or</p>
                 <button className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
                   Upload image
                 </button>
