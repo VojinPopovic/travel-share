@@ -6,7 +6,7 @@ import MainDiv from "@/components/MainDiv/MainDiv";
 import Image from "next/image";
 import Post from "@/components/Post/Post";
 import CreatePost from "@/components/CreatePost/CreatePost";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation/Navigation";
 import { useContext } from "react";
 import { GroupsContext } from "@/context/FollowedGroupsContext";
@@ -31,6 +31,14 @@ export default function Group({ params }) {
     `https://restcountries.com/v3.1/name/${idToUpper}`,
     fetcher
   );
+  
+  useEffect(() => {
+    if (renderPost) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }, [renderPost]);
 
   function reloadData() {
     mutate();
@@ -39,6 +47,7 @@ export default function Group({ params }) {
   function openModal() {
     setRenderPost(true);
   }
+
 
   if (isGroupPostsLoading || isImageLoading) {
     <Loading />;

@@ -28,21 +28,21 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
       reloadData();
     } catch (err) {
       console.log(err);
-    }
+       }
   };
   return (
     <div
       onClick={closeModal}
-      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 py-6 flex flex-col justify-center sm:py-12 z-10"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10 overflow-y-scroll"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative w-[98%] py-3 max-w-[600px] mx-auto"
+        className="relative w-full py-3 max-w-[600px] mx-auto"
       >
-        <div className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10">
-          <div className="max-w-md mx-auto">
-            <div className="flex items-center space-x-5">
-              <div className="h-14 w-14 _accent-color-bg rounded-full flex flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
+        <div className="relative px-4 pt-3 sm:pt-10 bg-white shadow mx-1 max-h-[90vh] overflow-auto rounded-3xl pb-2 sm:pb-10">
+          <div className="md:max-w-md mx-auto">
+            <div className="flex items-center sm:space-x-5">
+              <div className="hidden xs:flex h-14 w-14 _accent-color-bg rounded-full flex-shrink-0 justify-center items-center text-white text-2xl font-mono">
                 i
               </div>
               <div className="block pl-2 font-semibold text-xl self-start _text-color">
@@ -78,12 +78,12 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                     placeholder="Image link"
                   />
                 </div>
-                <p>Or</p>
+                <p className="opacity-70">Or</p>
                 <button className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
                   Upload image
                 </button>
               </div>
-              <div className="pt-4 flex items-center space-x-4">
+              <div className="pt-4 flex flex-col items-center sm:flex-row gap-4">
                 <button
                   onClick={closeModal}
                   className="flex justify-center items-center w-full _text-color px-4 py-3 rounded-md focus:outline-none"
