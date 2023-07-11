@@ -40,7 +40,7 @@ export default function CommentsModal({ setIsModalOpen, id, session }) {
         onClick={(e) => e.stopPropagation()}
         className="relative w-full sm:max-w-[600px] mx-auto"
       >
-        <div className="relative px-2 sm:px-4 py-2 sm:py-4 sm:py-8 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10 max-h-[100vh] overflow-y-auto">
+        <div className="relative px-2 sm:px-4 py-2 sm:py-4 sm:py-8 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10 max-h-[80vh] overflow-y-auto">
           <div className="mx-auto sm:px-5">
             <div className="mt-2 sm:mt-5 flex">
               <p className="_text-color text-2xl font-semibold mb-2 sm:mb-4">
