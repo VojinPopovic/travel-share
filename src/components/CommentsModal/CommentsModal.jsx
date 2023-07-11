@@ -8,7 +8,6 @@ import PartialLoading from "../PartialLoading/PartialLoading";
 export default function CommentsModal({ setIsModalOpen, id, session }) {
   function closeModal() {
     setIsModalOpen(false);
-    document.body.style.overflowY = "scroll";
   }
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());

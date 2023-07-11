@@ -62,9 +62,16 @@ export default function Post({ post, reloadData, saved }) {
     }
   }
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.style.overflowY = "hidden";
+    } else {
+      document.body.style.overflowY = "scroll";
+    }
+  }, [isModalOpen]);
+
   function openModal() {
     setIsModalOpen(true);
-    document.body.style.overflowY = "hidden";
   }
 
   function zoomImage() {
