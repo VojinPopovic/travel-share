@@ -79,9 +79,9 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                   />
                 </div>
                 <p className="opacity-70">Or</p>
-                <button className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
+                <input type="file" name="file" className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
                   Upload image
-                </button>
+                </input>
               </div>
               <div className="pt-4 flex flex-col items-center sm:flex-row gap-4">
                 <button
