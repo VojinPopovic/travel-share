@@ -61,7 +61,7 @@ export default function Home() {
             </div>
             <SearchBar />
           </div>
-          <div className="absolute w-full h-[150px] top-0 left-0 -z-[10] border-[rgba(0,0,0,0.68)] overflow-hidden md:h-[300px] md:rounded-b-xl md:border-2">
+          <div className="absolute w-full h-[150px] top-0 left-0 -z-[10] overflow-hidden md:h-[300px] md:rounded-b-xl border-2 border-b-4 border-gray-300">
             <Image
               className="object-cover"
               src={BackgroundImage}
