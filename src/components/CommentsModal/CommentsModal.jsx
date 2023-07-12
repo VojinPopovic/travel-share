@@ -34,7 +34,7 @@ export default function CommentsModal({ setIsModalOpen, id, session }) {
   return (
     <div
       onClick={closeModal}
-      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10 overflow-y-scroll"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10"
     >
       <div
         onClick={(e) => e.stopPropagation()}
