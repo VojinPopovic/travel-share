@@ -4,34 +4,10 @@ import { useState } from "react";
 export default function CreatePost({ setRenderPost, group, reloadData }) {
   const session = useSession();
   const [isImage, setIsImage] = useState(false);
-  const [dataUrl, setDataUrl] = useState();
+  const [img, setImg] = useState();
 
   function closeModal() {
     setRenderPost(false);
-  }
-
-  async function handleSubmit(e) {
-    const title = e.target[0].value;
-    const content = e.target[1].value;
-    const img = isImage ? dataUrl : e.target[2].value;
-
-    try {
-      await fetch("/api/posts", {
-        method: "POST",
-        body: JSON.stringify({
-          title,
-          content,
-          img,
-          email: session.data.user.email,
-          userimage: session.data.user.image,
-          group: group.replaceAll("%20", " "),
-        }),
-      });
-      e.target.reset();
-      reloadData();
-    } catch (err) {
-      console.log(err);
-    }
   }
 
   async function handleImageChange(e) {
@@ -57,7 +33,32 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
           body: formData,
         }
       ).then((r) => r.json());
-      setDataUrl(data.secure_url);
+      setImg(data.secure_url.toString());
+      console.log(data.secure_url.toString());
+    }
+  }
+
+  async function handleSubmit(e) {
+    const title = e.target[0].value;
+    const content = e.target[1].value;
+    const image = e.target[2].value;
+
+    try {
+      await fetch("/api/posts", {
+        method: "POST",
+        body: JSON.stringify({
+          title,
+          content,
+          img: img ? img : image,
+          email: session.data.user.email,
+          userimage: session.data.user.image,
+          group: group.replaceAll("%20", " "),
+        }),
+      });
+      e.target.reset();
+      reloadData()
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -119,7 +120,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                   {isImage ? "" : <p className="opacity-70">Or</p>}
                   <label
                     htmlFor="upload-input"
-                    className="_accent-color-bg w-max-[10%] text-white text-base px-4 py-2 rounded-md focus:outline-none cursor-pointer"
+                    className="_accent-color-bg max-w-[150px] text-white text-base px-4 py-2 rounded-md cursor-pointer text-center"
                   >
                     Select image
                   </label>
