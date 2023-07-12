@@ -54,17 +54,12 @@ export default function SavedPosts({ data, posts, email }) {
               )}
             </div>
             <p className="text-md _text-color font-semibold whitespace-nowrap text-2xl">
-              {session.status === "authenticated"
-                ? session?.data?.user?.name + "'s saved posts"
-                : ""}
+              Saved posts
             </p>
           </div>
         </div>
       </div>
-      <div className="px-[3%] pb-20">
-        <p className=" _text-color font-semibold whitespace-nowrap text-2xl mt-5">
-          Saved Posts
-        </p>
+      <div className="px-[3%] pb-20 pt-5">
         {content.length === 0 ? <p>No saved posts</p> : content}
       </div>
     </>

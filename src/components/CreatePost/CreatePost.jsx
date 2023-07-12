@@ -1,16 +1,19 @@
 import { useSession } from "next-auth/react";
+import { useState } from "react";
 
 export default function CreatePost({ setRenderPost, group, reloadData }) {
   const session = useSession();
+  const [isImage, setIsImage] = useState(false);
+  const [dataUrl, setDataUrl] = useState();
 
   function closeModal() {
     setRenderPost(false);
   }
 
-  const handleSubmit = async (e) => {
+  async function handleSubmit(e) {
     const title = e.target[0].value;
     const content = e.target[1].value;
-    const img = e.target[2].value;
+    const img = isImage ? dataUrl : e.target[2].value;
 
     try {
       await fetch("/api/posts", {
@@ -28,12 +31,40 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
       reloadData();
     } catch (err) {
       console.log(err);
-       }
-  };
+    }
+  }
+
+  async function handleImageChange(e) {
+    e.preventDefault();
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    const preview = document.getElementById("image-preview");
+    const formData = new FormData();
+    setIsImage(true);
+
+    reader.onload = function (e) {
+      preview.src = e.target.result;
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+      formData.append("file", file);
+      formData.append("upload_preset", "posts-images");
+
+      const data = await fetch(
+        "https://api.cloudinary.com/v1_1/ddkk047mx/image/upload",
+        {
+          method: "POST",
+          body: formData,
+        }
+      ).then((r) => r.json());
+      setDataUrl(data.secure_url);
+    }
+  }
+
   return (
     <div
       onClick={closeModal}
-      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10 overflow-y-scroll"
+      className="fixed top-0 left-0 min-h-screen w-full bg-gray-100 flex flex-col justify-center z-10"
     >
       <div
         onClick={(e) => e.stopPropagation()}
@@ -71,17 +102,43 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                   />
                 </div>
                 <div className="flex flex-col">
-                  <label className="leading-loose">Image</label>
-                  <input
-                    type="text"
-                    className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                    placeholder="Image link"
-                  />
+                  {isImage ? (
+                    ""
+                  ) : (
+                    <>
+                      <label className="leading-loose">Image</label>
+                      <input
+                        type="text"
+                        className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="Image link"
+                      />
+                    </>
+                  )}
                 </div>
-                <p className="opacity-70">Or</p>
-                <input type="file" name="file" className="_accent-color-bg flex justify-center items-center text-white text-base px-4 py-2 rounded-md focus:outline-none">
-                  Upload image
-                </input>
+                <div className="flex flex-col gap-4">
+                  {isImage ? "" : <p className="opacity-70">Or</p>}
+                  <label
+                    htmlFor="upload-input"
+                    className="_accent-color-bg w-max-[10%] text-white text-base px-4 py-2 rounded-md focus:outline-none cursor-pointer"
+                  >
+                    Select image
+                  </label>
+                  <input
+                    type="file"
+                    accept="image/jpeg, image/png, image/jpg, image/svg"
+                    id="upload-input"
+                    className="hidden"
+                    onChange={handleImageChange}
+                  />
+                  <img
+                    id="image-preview"
+                    src="#"
+                    alt="Image Preview"
+                    className={`${
+                      isImage ? "block" : "hidden"
+                    } max-w-[300px] max-h-[300px]`}
+                  ></img>
+                </div>
               </div>
               <div className="pt-4 flex flex-col items-center sm:flex-row gap-4">
                 <button

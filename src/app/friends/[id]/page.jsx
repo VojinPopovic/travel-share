@@ -58,7 +58,7 @@ export default function Friends({ params }) {
                 ></Image>
               </div>
               <p className="text-md _text-color font-semibold whitespace-nowrap text-2xl">
-                {isUserLoading ? "" : userData[0]?.username + "'s friends"}
+                Friends
               </p>
             </div>
             <button
