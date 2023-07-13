@@ -15,10 +15,13 @@ import Loading from "../loading";
 import { CreateUser } from "@/components/CreateUser/CreateUser";
 import SearchBar from "@/components/SearchBar/SearchBar";
 import Navigation from "@/components/Navigation/Navigation";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const session = useSession();
   const router = useRouter();
+  const [searchValue, setSearchValue] = useState("");
+  const [postFilter, setPostFilter] = useState();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
   const {
@@ -37,6 +40,14 @@ export default function Home() {
       router?.push("/");
     });
   }
+
+  useEffect(() => {
+    if (searchValue < 1) {
+      setPostFilter(posts);
+    } else {
+      setPostFilter(posts?.filter((post) => post.group.includes(searchValue)));
+    }
+  }, [searchValue]);
 
   if (isPostsLoading) {
     return <Loading />;
@@ -59,7 +70,7 @@ export default function Home() {
                 ></Image>
               </Link>
             </div>
-            <SearchBar />
+            <SearchBar setSearchValue={setSearchValue} />
           </div>
           <div className="absolute w-full h-[150px] top-0 left-0 -z-[10] overflow-hidden md:h-[300px] md:rounded-b-xl border-2 border-b-4 border-gray-300">
             <Image
@@ -101,7 +112,7 @@ export default function Home() {
               </div>
             </Link>
             <Link href={`/saved/${session?.data.user.email}`}>
-              <div className="w-[250px]  aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
+              <div className="w-[250px] aspect-[4/3] max-w-[250px] _card-gradient rounded-[20px] flex items-center justify-center flex-col hover:scale-105 transition duration-500 ease-in-out">
                 <div className="w-1/2 h-1/3">
                   <Image
                     className="w-3/5 mx-auto max-h-[50px]"
@@ -118,7 +129,7 @@ export default function Home() {
         </div>
         <section className="w-full px-[3%] pb-20">
           <p className="_text-color text-3xl font-semibold mt-5">Home</p>
-          {posts?.map((post) => {
+          {postFilter?.map((post) => {
             return (
               <Post post={post} reloadData={reloadData} key={post._id}></Post>
             );
