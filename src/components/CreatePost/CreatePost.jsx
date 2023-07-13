@@ -5,6 +5,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
   const session = useSession();
   const [isImage, setIsImage] = useState(false);
   const [img, setImg] = useState();
+  const [image, setImage] = useState();
 
   function closeModal() {
     setRenderPost(false);
@@ -56,10 +57,14 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
         }),
       });
       e.target.reset();
-      reloadData()
+      reloadData();
     } catch (err) {
       console.log(err);
     }
+  }
+
+  function linkReader(e) {
+    setImage(e.target.value);
   }
 
   return (
@@ -112,6 +117,7 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                         type="text"
                         className="px-4 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Image link"
+                        onChange={linkReader}
                       />
                     </>
                   )}
@@ -163,8 +169,9 @@ export default function CreatePost({ setRenderPost, group, reloadData }) {
                   Cancel
                 </button>
                 <button
-                  className="_accent-color-bg flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
+                  className="_accent-color-bg flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none disabled:opacity-40"
                   type="submit"
+                  disabled={img || image ? false : true}
                 >
                   Create
                 </button>
