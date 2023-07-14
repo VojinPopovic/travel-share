@@ -38,7 +38,7 @@ export default function Home() {
           <Navbar></Navbar>
           <div className="absolute w-full md:w-[94%] max-w-[900px] h-full md:h-[70%] md:max-h-[350px] m-auto left-0 right-0 top-0 bottom-0">
             <div className="h-1/2 absolute w-[80%] md:w-[50%] flex flex-col justify-center items-start gap-[4%] md:text-left md:h-full bottom-0 top-0 left-0 right-0 m-auto md:m-0">
-              <div className="md:relative _transparent-gradient rounded-xl md:rounded-[20px] px-3 py-3 sm:py-[6%]">
+              <div className="md:relative _transparent-gradient rounded-xl md:rounded-[20px] px-3 py-5 md:py-[6%]">
                 <Image
                   className="absolute hidden md:block w-[35%] aspect-square top-[-100px] right-[-60px]"
                   src={planeImage}
@@ -46,12 +46,12 @@ export default function Home() {
                   width="auto"
                   height="auto"
                 ></Image>
-                <p className="text-xl sm:text-4xl _text-color font-bold">
+                <p className="text-2xl sm:text-4xl _text-color font-bold">
                   Learn about
                   <span className="_accent-color"> new </span>
                   and interesting destinations!
                 </p>
-                <p className="text-sm sm:text-base _text-color mt-[4%]">
+                <p className="text-base _text-color mt-3 md:mt-[4%]">
                   Share the expiriences with people all around the world about
                   your favorite destinations to visit
                 </p>
