@@ -34,11 +34,11 @@ export default function Home() {
             alt=""
           ></Image>
         </div>
-        <main className="w-[100%] max-w-[1400px] h-screen mx-auto relative">
+        <main className="w-full max-w-[1400px] h-screen mx-auto relative">
           <Navbar></Navbar>
-          <div className="absolute w-[94%] max-w-[900px] h-[70%] max-h-[350px] m-auto left-0 right-0 top-0 bottom-0">
+          <div className="absolute w-full md:w-[94%] max-w-[900px] h-full md:h-[70%] md:max-h-[350px] m-auto left-0 right-0 top-0 bottom-0">
             <div className="h-1/2 absolute w-[80%] md:w-[50%] flex flex-col justify-center items-start gap-[4%] md:text-left md:h-full bottom-0 top-0 left-0 right-0 m-auto md:m-0">
-              <div className="md:relative _transparent-gradient rounded-xl md:rounded-[20px] px-3 py-3 sm:py-[6%]">
+              <div className="md:relative _transparent-gradient rounded-xl md:rounded-[20px] px-3 py-5 md:py-[6%]">
                 <Image
                   className="absolute hidden md:block w-[35%] aspect-square top-[-100px] right-[-60px]"
                   src={planeImage}
@@ -46,12 +46,12 @@ export default function Home() {
                   width="auto"
                   height="auto"
                 ></Image>
-                <p className="text-xl sm:text-4xl _text-color font-bold">
+                <p className="text-2xl sm:text-4xl _text-color font-bold">
                   Learn about
                   <span className="_accent-color"> new </span>
                   and interesting destinations!
                 </p>
-                <p className="text-sm sm:text-base _text-color mt-[4%]">
+                <p className="text-base _text-color mt-3 md:mt-[4%]">
                   Share the expiriences with people all around the world about
                   your favorite destinations to visit
                 </p>
@@ -65,9 +65,9 @@ export default function Home() {
                 <span className="relative">Sign In!</span>
               </button>
             </div>
-            <div className="absolute top-0 bottom-0 my-auto w-full h-full md:aspect-auto right-0 md:w-[70%] md:h-full -z-[2]">
+            <div className="absolute top-0 bottom-0 my-auto w-full md:aspect-auto right-0 md:w-[70%] md:h-full -z-[2]">
               <Image
-                className="rounded-[20px]"
+                className="md:rounded-[20px]"
                 src="https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
                 fill={true}
                 alt=""

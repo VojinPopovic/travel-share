@@ -1,9 +1,14 @@
+"use client"
+
 import MainDiv from "@/components/MainDiv/MainDiv";
 import BackgroundImage from "../../../public/backgroundImage.svg";
 import Image from "next/image";
 import Navbar from "@/components/Navbar/Navbar";
 
 export default function Feedback() {
+  function submitHandler(e){
+    e.target.reset()
+  }
   return (
     <>
       <MainDiv>
@@ -28,7 +33,7 @@ export default function Feedback() {
                   </div>
                 </div>
                 <div className="rounded-lg bg-white p-3 md:p-8 shadow-lg lg:col-span-3 lg:p-12">
-                  <form
+                  <form onSubmit={submitHandler}
                     action="https://api.web3forms.com/submit"
                     method="POST"
                     className="space-y-4"
