@@ -17,7 +17,7 @@ export default function SearchBar({ setSearchValue }) {
           <input
             type="text"
             placeholder="Search by group name"
-            className="w-full h-full bg-transparent rounded-full pl-2 placeholder:text-black opacity-50"
+            className="w-full h-full bg-transparent rounded-full pl-2 placeholder:text-black opacity-70"
           />
         </form>
       </div>
