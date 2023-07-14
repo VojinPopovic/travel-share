@@ -20,7 +20,7 @@ import { useState, useEffect } from "react";
 export default function Home() {
   const session = useSession();
   const router = useRouter();
-  const [searchValue, setSearchValue] = useState("");
+  const [searchValue, setSearchValue] = useState("0");
   const [postFilter, setPostFilter] = useState();
 
   const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -42,12 +42,12 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (searchValue < 1) {
+    if (searchValue === "0") {
       setPostFilter(posts);
     } else {
       setPostFilter(posts?.filter((post) => post.group.includes(searchValue)));
     }
-  }, [searchValue]);
+  }, [searchValue, postsData]);
 
   if (isPostsLoading) {
     return <Loading />;
