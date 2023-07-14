@@ -45,7 +45,7 @@ export default function Home() {
     if (searchValue === "0") {
       setPostFilter(posts);
     } else {
-      setPostFilter(posts?.filter((post) => post.group.includes(searchValue)));
+      setPostFilter(posts?.filter((post) => post.group.includes(searchValue.toLowerCase())));
     }
   }, [searchValue, postsData]);
 
