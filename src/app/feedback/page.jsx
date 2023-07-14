@@ -15,8 +15,8 @@ export default function Feedback() {
                 <div className="lg:col-span-2 lg:py-12">
                   <p className="max-w-xl text-xs xs:text-base md:text-lg">
                     Share your travel adventures with us! Fill out our contact
-                    form and let us hear your amazing stories. Or let us know how
-                    we can improve your expirience on our website!
+                    form and let us hear your amazing stories. Or let us know
+                    how we can improve your expirience on our website!
                   </p>
                   <div className="mt-3 md:mt-8">
                     <p className="text-base xs:text-lg md:text-2xl font-bold text-orange-600">
@@ -28,16 +28,26 @@ export default function Feedback() {
                   </div>
                 </div>
                 <div className="rounded-lg bg-white p-3 md:p-8 shadow-lg lg:col-span-3 lg:p-12">
-                  <form action="" className="space-y-4">
+                  <form
+                    action="https://api.web3forms.com/submit"
+                    method="POST"
+                    className="space-y-4"
+                  >
+                    <input
+                      type="hidden"
+                      name="access_key"
+                      value="e0199f24-d53d-4c1a-a455-e0bfb4c1e7c1"
+                    ></input>
                     <div>
                       <label className="sr-only" htmlFor="name">
                         Name
                       </label>
                       <input
-                        className="w-full rounded-lg p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Name"
                         type="text"
                         id="name"
+                        required
                       />
                     </div>
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
@@ -46,10 +56,11 @@ export default function Feedback() {
                           Email
                         </label>
                         <input
-                          className="w-full rounded-lg p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                          className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Email address"
                           type="email"
                           id="email"
+                          required
                         />
                       </div>
                       <div>
@@ -57,7 +68,7 @@ export default function Feedback() {
                           Phone
                         </label>
                         <input
-                          className="w-full rounded-lg p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                          className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                           placeholder="Phone Number"
                           type="tel"
                           id="phone"
@@ -69,10 +80,11 @@ export default function Feedback() {
                         Message
                       </label>
                       <textarea
-                        className="w-full rounded-lg p-3 text-sm md:h-[150px] border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        className="w-full p-3 text-sm md:h-[150px] border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
                         placeholder="Message"
                         rows="3"
                         id="message"
+                        required
                       ></textarea>
                     </div>
                     <div className="xs:mt-4">
@@ -84,6 +96,11 @@ export default function Feedback() {
                       </button>
                     </div>
                   </form>
+                  <script
+                    src="https://web3forms.com/client/script.js"
+                    async
+                    defer
+                  ></script>
                 </div>
               </div>
             </div>

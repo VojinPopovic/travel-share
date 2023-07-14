@@ -132,7 +132,7 @@ export default function AddFriends({ setIsFriendsOpen }) {
                     className="_accent-color-bg flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none"
                     type="submit"
                   >
-                    Create
+                   Add friend 
                   </button>
                 </div>
               </form>
