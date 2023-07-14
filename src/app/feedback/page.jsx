@@ -35,58 +35,39 @@ export default function Feedback() {
                   >
                     <input
                       type="hidden"
-                      name="access_key"
+                      name="apikey"
                       value="e0199f24-d53d-4c1a-a455-e0bfb4c1e7c1"
                     ></input>
-                    <div>
-                      <label className="sr-only" htmlFor="name">
-                        Name
-                      </label>
+
+                    <input
+                      className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                      placeholder="Name"
+                      type="text"
+                      name="name"
+                      required
+                    />
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                       <input
                         className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Name"
-                        type="text"
-                        id="name"
+                        placeholder="Email address"
+                        type="email"
+                        name="email"
                         required
                       />
+                      <input
+                        className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                        placeholder="Phone Number"
+                        type="tel"
+                        name="phone"
+                      />
                     </div>
-                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                      <div>
-                        <label className="sr-only" htmlFor="email">
-                          Email
-                        </label>
-                        <input
-                          className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                          placeholder="Email address"
-                          type="email"
-                          id="email"
-                          required
-                        />
-                      </div>
-                      <div>
-                        <label className="sr-only" htmlFor="phone">
-                          Phone
-                        </label>
-                        <input
-                          className="w-full p-3 text-sm border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                          placeholder="Phone Number"
-                          type="tel"
-                          id="phone"
-                        />
-                      </div>
-                    </div>
-                    <div>
-                      <label className="sr-only" htmlFor="message">
-                        Message
-                      </label>
-                      <textarea
-                        className="w-full p-3 text-sm md:h-[150px] border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
-                        placeholder="Message"
-                        rows="3"
-                        id="message"
-                        required
-                      ></textarea>
-                    </div>
+                    <textarea
+                      className="w-full p-3 text-sm md:h-[150px] border focus:ring-gray-500 focus:border-gray-900 sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600"
+                      placeholder="Message"
+                      rows="3"
+                      name="message"
+                      required
+                    ></textarea>
                     <div className="xs:mt-4">
                       <button
                         type="submit"
@@ -96,11 +77,6 @@ export default function Feedback() {
                       </button>
                     </div>
                   </form>
-                  <script
-                    src="https://web3forms.com/client/script.js"
-                    async
-                    defer
-                  ></script>
                 </div>
               </div>
             </div>
