@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Logo from "../../../public/travelShareLogo.svg";
 import Link from "next/link";
 import HamburgerMenu from "../../../public/hamburgerMenuIcon.svg";
 import CloseHamburger from "../../../public/closeHamburgerImage.svg";
@@ -60,11 +59,12 @@ export default function Navbar() {
         <div className="relative w-full max-w-[900px] h-[71px] sm:h-[120px] _text-color flex items-center justify-between z-10 mx-auto">
           <Link href="/">
             <svg
-              width="60"
-              height="60"
+              width="50"
+              height="50"
               viewBox="0 0 69 67"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="md:w-[60px] md:h-[60px]"
             >
               <path
                 d="M57.6667 49.6667C59 47.3333 60 44.6667 60 41.6667C60 33.3333 53.3333 26.6667 45 26.6667C36.6667 26.6667 30 33.3333 30 41.6667C30 50 36.6667 56.6667 45 56.6667C48 56.6667 50.6667 55.6667 53 54.3333L63.6667 65L68.3333 60.3333L57.6667 49.6667ZM45 50C40.3333 50 36.6667 46.3333 36.6667 41.6667C36.6667 37 40.3333 33.3333 45 33.3333C49.6667 33.3333 53.3333 37 53.3333 41.6667C53.3333 46.3333 49.6667 50 45 50ZM33.3333 60V66.6667C14.9333 66.6667 0 51.7333 0 33.3333C0 14.9333 14.9333 0 33.3333 0C49.4667 0 62.9 11.4667 66 26.6667H59.1C58.0604 22.6395 56.0931 18.9113 53.3554 15.78C50.6178 12.6488 47.1857 10.2014 43.3333 8.63333V10C43.3333 13.6667 40.3333 16.6667 36.6667 16.6667H30V23.3333C30 25.1667 28.5 26.6667 26.6667 26.6667H20V33.3333H26.6667V43.3333H23.3333L7.36667 27.3667C6.93333 29.3 6.66667 31.2667 6.66667 33.3333C6.66667 48.0333 18.6333 60 33.3333 60Z"
