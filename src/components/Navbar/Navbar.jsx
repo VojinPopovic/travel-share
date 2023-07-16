@@ -23,8 +23,10 @@ export default function Navbar() {
         closeHamburger.current.style.display = "none";
         menu.current.style.display = "none";
       }
-    } else if (width < 890 && closeHamburger.current.style.display === "none") {
+    } else if (width < 890) {
       openHamburger.current.style.display = "flex";
+      closeHamburger.current.style.display = "none";
+      setIsOpen(false)
     }
 
     window.addEventListener("resize", handleResize);
