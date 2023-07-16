@@ -12,6 +12,7 @@ export default function Navbar() {
   const closeHamburger = useRef();
   const [width, setWidth] = useState();
   const [isOpen, setIsOpen] = useState(false);
+  const menu = useRef()
 
   useEffect(() => {
     const handleResize = () => {
@@ -20,6 +21,7 @@ export default function Navbar() {
     if (width >= 890) {
       closeHamburger.current.style.display = "none";
       openHamburger.current.style.display = "none";
+      menu.current.style.display = "none";
     } else if (width < 890 && closeHamburger.current.style.display === "none") {
       openHamburger.current.style.display = "flex";
     }
@@ -81,7 +83,7 @@ export default function Navbar() {
         </div>
       </div>
       {isOpen ? (
-        <div className="bg-orange-600 absolute w-1/2 h-screen flex flex-col justify-center items-end pr-[15%] gap-10 z-[9] top-0 right-0 text-4xl text-black">
+        <div ref={menu} className="bg-orange-600 absolute w-full sm:w-1/2 h-screen flex flex-col justify-center items-center sm:items-end sm:pr-[15%] gap-10 z-[9] content-center top-0 right-0 text-4xl text-black">
           {unorderedList}
         </div>
       ) : (
