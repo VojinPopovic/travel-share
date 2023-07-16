@@ -21,7 +21,9 @@ export default function Navbar() {
     if (width >= 890) {
       closeHamburger.current.style.display = "none";
       openHamburger.current.style.display = "none";
-      menu.current.style.display = "none";
+      if (menu.current !== undefined) {
+        menu.current.style.display = "none";
+      }
     } else if (width < 890 && closeHamburger.current.style.display === "none") {
       openHamburger.current.style.display = "flex";
     }
@@ -69,7 +71,7 @@ export default function Navbar() {
                 fill="#CF3200"
                 fill-opacity="0.76"
                 className={`${
-                  openHamburger.current.style.display === "flex"
+                  openHamburger?.current?.style.display === "flex"
                     ? "inline-block"
                     : "hidden sm:inline-block"
                 }`}
