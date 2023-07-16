@@ -21,7 +21,7 @@ export default function Navbar() {
     if (width >= 890) {
       closeHamburger.current.style.display = "none";
       openHamburger.current.style.display = "none";
-      if (menu.current !== undefined) {
+      if (isOpen) {
         menu.current.style.display = "none";
       }
     } else if (width < 890 && closeHamburger.current.style.display === "none") {
